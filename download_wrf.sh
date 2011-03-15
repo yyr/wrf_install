@@ -15,8 +15,7 @@ chmod +x $CLEAN_SRC
 #JASPER
 APP=jasper-1.900.1
 EXT=zip
-JASPER_PATH=$INSTALL_PATH/$APP
-echo 'export JASPER_PATH='$JASPER_PATH >> $ENV
+echo 'export JASPER='$APP >> $ENV
 echo rm ${APP}.${EXT} >> $CLEAN_DOWN
 cd $INSTALL_PATH/src
 wget -c http://www.ece.uvic.ca/~mdadams/jasper/software/${APP}.${EXT}
@@ -26,8 +25,7 @@ echo rm -rf ${APP} >> $CLEAN_SRC
 #JPEG
 APP=jpegsrc.v8c
 EXT=tar.gz
-JPEG_PATH=$INSTALL_PATH/$APP
-echo 'export JPEG_PATH='$JPEG_PATH >> $ENV
+echo 'export JPEG='$APP >> $ENV
 chmod +x $ENV
 echo rm ${APP}.${EXT} >> $CLEAN_DOWN
 cd $INSTALL_PATH/src
@@ -38,8 +36,7 @@ echo rm -rf jpeg-8c >> $CLEAN_SRC
 # ZLIB
 APP=zlib-1.2.5
 EXT=tar.gz
-ZLIB_PATH=$INSTALL_PATH/$APP
-echo 'export ZLIB_PATH='$ZLIB_PATH >> $ENV
+echo 'export ZLIB='$APP >> $ENV
 echo rm ${APP}.${EXT} >> $CLEAN_DOWN
 cd $INSTALL_PATH/src
 wget -c http://zlib.net/${APP}.tar.gz
@@ -48,8 +45,8 @@ echo rm -rf ${APP} >> $CLEAN_SRC
 
 # HDF5
 APP=hdf5-1.8.6
-HDF5_PATH=$INSTALL_PATH/$APP
-echo 'export HDF5_PATH='$HDF5_PATH >> $ENV
+EXT=tar.gz
+echo 'export HDF5='$APP >> $ENV
 echo rm ${APP}.${EXT} >> $CLEAN_DOWN
 cd $INSTALL_PATH/src
 wget -c http://www.hdfgroup.org/ftp/HDF5/${APP}/src/${APP}.${EXT}
@@ -58,8 +55,8 @@ echo rm -rf ${APP} >> $CLEAN_SRC
 
 # NetCDF4
 APP=netcdf-4.1.1
-NETCDF4_PATH=$INSTALL_PATH/$APP
-echo 'export NETCDF4_PATH='$NETCDF4_PATH >> $ENV
+EXT=tar.gz
+echo 'export NETCDF4='$APP >> $ENV
 echo rm ${APP}.${EXT} >> $CLEAN_DOWN
 cd $INSTALL_PATH/src
 wget -c ftp://ftp.unidata.ucar.edu/pub/netcdf/${APP}.${EXT}
@@ -70,7 +67,7 @@ echo rm -rf ${APP} >> $CLEAN_SRC
 APP=WRFV3.2.1
 EXT=TAR.gz
 WRF_PATH=$INSTALL_PATH/$APP
-echo 'export WRF_PATH='$WRF_PATH >> $ENV
+echo 'export WRF='$APP >> $ENV
 echo rm ${APP}.${EXT} >> $CLEAN_DOWN
 cd $INSTALL_PATH/src
 wget -c http://www.mmm.ucar.edu/wrf/src/${APP}.${EXT}
@@ -81,7 +78,7 @@ echo rm -rf WRFV3 >> $CLEAN_SRC
 APP=WPSV3.2.1
 EXT=TAR.gz
 WPS_PATH=$INSTALL_PATH/$APP
-echo 'export WPS_PATH='$WPS_PATH >> $ENV
+echo 'export WPS='$APP >> $ENV
 echo rm ${APP}.${EXT} >> $CLEAN_DOWN
 cd $INSTALL_PATH/src
 wget -c http://www.mmm.ucar.edu/wrf/src/${APP}.${EXT}
