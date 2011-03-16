@@ -17,7 +17,7 @@ export CFLAGS='-O3 -xP -ip'
 export CXXFLAGS='-O3 -xP -ip'
 export FFLAGS='-O3 -xP -ip'
 rm CMakeCache.txt
-cmake -DCMAKE_INSTALL_PREFIX:path=/opt/wrf/intel/zlib-1.2.5 . | tee ${APP}.${COMP}.config
+cmake -DCMAKE_INSTALL_PREFIX:path=/opt/wrf/bin/intel/zlib-1.2.5 . | tee ${APP}.${COMP}.config
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
 make check 2>&1 | tee ${APP}.${COMP}.check

@@ -1,12 +1,12 @@
 #!/bin/bash
 COMP=gcc
-. $INSTALL_PATH/JPEG.env
+. $INSTALL_PATH/JASPER.env
 cd $INSTALL_PATH/src/
 rm -r ${DIR}
-tar zxf ${APP}.${EXT}
+unzip ${APP}.${EXT}
 cd ${DIR}
-#. $INTEL_COMPILER_TOPDIR/bin/intel64/iccvars_intel64.sh
-#. $INTEL_COMPILER_TOPDIR/bin/intel64/ifortvars_intel64.sh
+. $INTEL_COMPILER_TOPDIR/bin/intel64/iccvars_intel64.sh
+. $INTEL_COMPILER_TOPDIR/bin/intel64/ifortvars_intel64.sh
 export CC=gcc
 export FC=gfortran
 export CXX=''

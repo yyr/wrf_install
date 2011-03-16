@@ -1,6 +1,12 @@
 #!/bin/bash
 COMP=intel
+. $INSTALL_PATH/ZLIB.env
+ZLIB_PATH=$INSTALL_PATH/bin/$COMP/$APP
 . $INSTALL_PATH/SZIP.env
+SZIP_PATH=$INSTALL_PATH/bin/$COMP/$APP
+. $INSTALL_PATH/HDF5.env
+HDF5_PATH=$INSTALL_PATH/bin/$COMP/$APP
+. $INSTALL_PATH/NETCDF4.env
 cd $INSTALL_PATH/src/
 rm -r ${DIR}
 tar zxf ${APP}.${EXT}
@@ -16,7 +22,13 @@ export F77=ifort
 export CFLAGS='-O3 -xP -ip' 
 export CXXFLAGS='-O3 -xP -ip' 
 export FFLAGS='-O3 -xP -ip' 
-./configure --prefix=$INSTALL_PATH/bin/${COMP}/${APP} | tee ${APP}.${COMP}.config
+./configure \
+--prefix=$INSTALL_PATH/bin/${COMP}/${APP} \
+--enable-fortran \
+--with-zlib=$ZLIB_PATH \
+--with-szlib=$SZIP_PATH \
+--with-hdf5=$HDF5_PATH \
+--with-pic | tee ${APP}.${COMP}.config
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
 make check 2>&1 | tee ${APP}.${COMP}.check
