@@ -1,8 +1,7 @@
 syntax: glob
 *~
 src*
-intel*
-gcc*
+bin*
 
 syntax: regexp
 (.*/)?\#[^/]*\#$
