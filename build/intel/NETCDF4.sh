@@ -28,7 +28,8 @@ export FFLAGS='-O3 -xP -ip'
 --with-zlib=$ZLIB_PATH \
 --with-szlib=$SZIP_PATH \
 --with-hdf5=$HDF5_PATH \
---with-pic | tee ${APP}.${COMP}.config
+--with-pic \
+--disable-dap | tee ${APP}.${COMP}.config
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
 make check 2>&1 | tee ${APP}.${COMP}.check
