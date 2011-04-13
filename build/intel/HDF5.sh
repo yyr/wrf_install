@@ -1,11 +1,12 @@
 #!/bin/bash
-COMP=intel
-. $INSTALL_PATH/ZLIB.env
-ZLIB_PATH=$INSTALL_PATH/bin/$COMP/$APP
-. $INSTALL_PATH/SZIP.env
-SZIP_PATH=$INSTALL_PATH/bin/$COMP/$APP
-. $INSTALL_PATH/HDF5.env
-cd $INSTALL_PATH/src/
+. /opt/wrf/SETTINGS.env
+. $WRF_PATH/INTEL.env
+. $WRF_PATH/ZLIB.env
+ZLIB_PATH=$WRF_PATH/bin/$COMP/$APP
+. $WRF_PATH/SZIP.env
+SZIP_PATH=$WRF_PATH/bin/$COMP/$APP
+. $WRF_PATH/HDF5.env
+cd $WRF_PATH/src/
 rm -r ${DIR}
 tar zxf ${APP}.${EXT}
 cd ${DIR}
@@ -21,7 +22,7 @@ export CFLAGS='-O3 -xP -ip'
 export CXXFLAGS='-O3 -xP -ip' 
 export FFLAGS='-O3 -xP -ip' 
 ./configure \
---prefix=$INSTALL_PATH/bin/${COMP}/${APP} \
+--prefix=$WRF_PATH/bin/${COMP}/${APP} \
 --enable-fortran \
 --with-zlib=$ZLIB_PATH \
 --with-szlib=$SZIP_PATH \

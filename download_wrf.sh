@@ -1,6 +1,5 @@
 #!/bin/bash
-#Settings
-. SETTINGS.env
+packages="HDF5 JASPER NETCDF4 SZIP ZLIB JPEG WPS WRF"
 
 # Setup source directory
 mkdir -p $INSTALL_PATH/src
@@ -19,3 +18,4 @@ do
     wget -c ${URL} -P $INSTALL_PATH/src
     echo rm -rf ${DIR} >> $CLEAN_SRC
 done
+
