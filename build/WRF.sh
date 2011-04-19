@@ -7,3 +7,4 @@ cd $WRF_ROOT
 wget http://www.mmm.ucar.edu/wrf/src/fix/configure_fix.tar
 tar xf configure_fix.tar
 chmod +x configure
+cp $WRF_BASE/build/configure_for_hdf5.sh .
