@@ -1,12 +1,10 @@
 #!/bin/bash
-. $WRF_ROOT/ZLIB.env
-cd $WRF_ROOT/src/
-rm -r ${DIR}
-tar zxf ${APP}.${EXT}
+. $WRF_BASE/ZLIB.env
+cd $WRF_BASE/src/
 cd ${DIR}
 rm CMakeCache.txt
-cmake -DCMAKE_INSTALL_PREFIX:path=/opt/wrf/bin/intel/zlib-1.2.5 . | tee ${APP}.${COMP}.config
+cmake -DCMAKE_INSTALL_PREFIX:path=$WRF_BASE/${COMP} . | tee ${APP}.${COMP}.config
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
 make check 2>&1 | tee ${APP}.${COMP}.check
-make install 2>&1 | tee $SZIP.${COMP}.install
+make install 2>&1 | tee ${APP}.${COMP}.install
