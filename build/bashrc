@@ -1,0 +1,5 @@
+# WRF
+export WRF_BASE=/opt/wrf
+. $WRF_BASE/INTEL.env
+#. $WRF_BASE/GCC.env
+. $WRF_BASE/WPS.env
