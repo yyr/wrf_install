@@ -8,5 +8,5 @@ wget http://www.mmm.ucar.edu/wrf/src/fix/configure_fix.tar
 tar xf configure_fix.tar
 chmod +x configure
 ./configure < $WRF_BASE/build/configure.wrf.${COMP}.select
-$WRF_BASE/build/configure.wps.hdf5.sh
-./compile &> compile.log
+$WRF_BASE/build/configure.wrf.hdf5.sh
+./compile em_real &> compile.log
