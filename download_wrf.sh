@@ -1,6 +1,7 @@
 #!/bin/bash
 packages="HDF5 JASPER NETCDF4 SZIP ZLIB JPEG WPS WRF"
 
+INSTALL_PATH=~/wrf/
 # Setup source directory
 mkdir -p $INSTALL_PATH/src
 CLEAN_DOWN=$INSTALL_PATH/src/wrf_clean_downloads.sh
