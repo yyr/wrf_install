@@ -1,9 +1,13 @@
 #!/bin/bash
-packages="HDF5 JASPER NETCDF4 SZIP ZLIB JPEG WPS WRF"
+packages="HDF5 JASPER NETCDF4 SZIP ZLIB JPEG WPS WRF GRADS"
 
 INSTALL_PATH=~/wrf/
 # Setup source directory
-mkdir -p $INSTALL_PATH/src
+mkdir -p $INSTALL_PATH/src      # make
+
+# copy all env file to install path
+cp *.env $INSTALL_PATH/
+
 CLEAN_DOWN=$INSTALL_PATH/src/wrf_clean_downloads.sh
 echo '#!/bin/bash' > $CLEAN_DOWN
 chmod +x $CLEAN_DOWN
@@ -19,4 +23,3 @@ do
     wget -c ${URL} -P $INSTALL_PATH/src
     echo rm -rf ${DIR} >> $CLEAN_SRC
 done
-
