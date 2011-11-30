@@ -1,5 +1,8 @@
+# location of automation scripts
+export SCRIPTS_DIR=~/git/wrf_install/
+
 # WRF
 export WRF_BASE=~/wrf/
-. $WRF_BASE/INTEL.env
-#. $WRF_BASE/GCC.env
-. $WRF_BASE/WPS.env
+#. $SCRIPTS_DIR/INTEL.env
+. $SCRIPTS_DIR/GCC.env
+. $SCRIPTS_DIR/WPS.env

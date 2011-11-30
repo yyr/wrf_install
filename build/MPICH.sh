@@ -1,5 +1,5 @@
 #!/bin/bash
-. $WRF_BASE/MPICH.env
+. $SCRIPTS_DIR/MPICH.env
 cd $WRF_BASE/src/
 cd ${DIR}
 ./configure --prefix=$MPICH_ROOT | tee ${APP}.${COMP}.config

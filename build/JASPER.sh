@@ -1,5 +1,5 @@
 #!/bin/bash
-. $WRF_BASE/JASPER.env
+. $SCRIPTS_DIR/JASPER.env
 cd $WRF_BASE/src/
 cd ${DIR}
 ./configure --prefix=$JASPER_ROOT | tee ${APP}.${COMP}.config

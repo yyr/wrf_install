@@ -1,7 +1,8 @@
 #!/bin/bash
-. $WRF_BASE/SZIP.env
+. $SCRIPTS_DIR/SZIP.env
 cd $WRF_BASE/src/
 cd ${DIR}
+echo $(pwd)
 ./configure --prefix=$SZIP_ROOT | tee ${APP}.${COMP}.config
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make

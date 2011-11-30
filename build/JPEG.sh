@@ -1,5 +1,5 @@
 #!/bin/bash
-. $WRF_BASE/JPEG.env
+. $SCRIPTS_DIR/JPEG.env
 cd $WRF_BASE/src/
 cd ${DIR}
 ./configure --prefix=$JPEG_ROOT | tee ${APP}.${COMP}.config

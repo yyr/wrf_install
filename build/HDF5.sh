@@ -1,7 +1,7 @@
 #!/bin/bash
-. $WRF_BASE/ZLIB.env
-. $WRF_BASE/SZIP.env
-. $WRF_BASE/HDF5.env
+. $SCRIPTS_DIR/ZLIB.env
+. $SCRIPTS_DIR/SZIP.env
+. $SCRIPTS_DIR/HDF5.env
 cd $WRF_BASE/src/
 cd ${DIR}
 ./configure \
