@@ -54,18 +54,22 @@ function clean_line ()
 ###########################################################################
 # CODE STARTS FORM HERE
 
-all_packages="HDF5
-JASPER
-NETCDF4
+all_packages="
 SZIP
 ZLIB
 JPEG
-NCO
-NCVIEW
+JASPER
+HDF5
+NETCDF4
+UDUNITS2
 WPS
 WRF
+NCO
+VAPOR
+NCVIEW
+WGRIB2
 GRADS
-WGRIB2" # env files should be present in the SCRIPTS_DIR
+" # env files should be present in the SCRIPTS_DIR
 
 # check needed environment variables are present or not
 env_error=24
