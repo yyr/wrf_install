@@ -3,20 +3,12 @@
 . $SCRIPTS_DIR/SZIP.env
 . $SCRIPTS_DIR/HDF5.env
 . $SCRIPTS_DIR/UDUNITS2.env
-. $SCRIPTS_DIR/NETCDF4.env
 cd $WRF_BASE/src/
 cd ${DIR}
-
 ./configure \
-    --prefix=$NETCDF4_ROOT \
-    --enable-fortran \
-    --enable-udunits \
-    --with-zlib=$ZLIB_ROOT \
-    --with-szlib=$SZIP_ROOT \
-    --with-hdf5=$HDF5_ROOT \
-    --with-pic \
-    --with-libcf \
-    --disable-dap | tee ${APP}.${COMP}.config
+    --prefix=$UDUNITS2_ROOT \
+    --exec-prefix=$UDUNITS2_ROOT \
+    --with-pic | tee ${APP}.${COMP}.config
 
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
