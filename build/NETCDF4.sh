@@ -7,6 +7,8 @@
 cd $WRF_BASE/src/
 cd ${DIR}
 
+echo $(pwd)
+
 ./configure \
     --prefix=$NETCDF4_ROOT \
     --enable-fortran \

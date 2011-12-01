@@ -4,6 +4,7 @@
 . $SCRIPTS_DIR/HDF5.env
 cd $WRF_BASE/src/
 cd ${DIR}
+
 ./configure \
     --prefix=$HDF5_ROOT \
     --exec-prefix=$HDF5_ROOT \

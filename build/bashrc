@@ -3,6 +3,5 @@ export SCRIPTS_DIR=~/git/wrf_install
 
 # WRF
 export WRF_BASE=~/wrf
-#. $SCRIPTS_DIR/INTEL.env
-. $SCRIPTS_DIR/GCC.env
-. $SCRIPTS_DIR/WPS.env
+. $SCRIPTS_DIR/INTEL.env
+# . $SCRIPTS_DIR/GCC.env
