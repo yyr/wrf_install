@@ -26,8 +26,8 @@ function download_package()
     echo rm ${APP}.${EXT} \# $APP >> $CLEAN_DOWN
     echo rm -rf ${DIR} \# $APP >> $CLEAN_SRC
     case ${EXT} in
-        *".gz" )
-            echo tar xvf ${APP}.${EXT} \# $APP >> $EXTRACT_SRC ;;
+        *".gz"|*"tgz" )
+            echo tar xzvf ${APP}.${EXT} \# $APP >> $EXTRACT_SRC ;;
         *"zip" )
             echo unzip ${APP}.${EXT} \# $APP >> $EXTRACT_SRC ;;
         * )
@@ -55,7 +55,7 @@ function clean_line ()
 # CODE STARTS FORM HERE
 
 all_packages="HDF5 JASPER NETCDF4 SZIP
-   ZLIB JPEG WPS WRF GRADS" # env files should be present in the SCRIPTS_DIR
+   ZLIB JPEG NCO WPS WRF GRADS WGRIB2" # env files should be present in the SCRIPTS_DIR
 
 # check needed environment variables are present or not
 env_error=24
@@ -105,6 +105,9 @@ while [ $counter -le $# ]; do
             ;;
         grads|GRADS )
             download_package GRADS
+            ;;
+        *)
+            download_package $1
             ;;
     esac
 
