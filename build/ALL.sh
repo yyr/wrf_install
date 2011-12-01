@@ -6,9 +6,9 @@
 ./UDUNITS2.sh
 ./NETCDF4.sh
 ./NCVIEW.sh
-./NCO.sh
 ./MPICH.sh
-./NCARG.sh # note installs binary for GCC only
+./NCO.sh
+#./NCARG.sh # note installs binary for GCC only
 ./WRF.sh
 ./WPS.sh
 
