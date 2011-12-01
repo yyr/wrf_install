@@ -14,7 +14,7 @@ cd ${DIR}
     --prefix=$NCVIEW_ROOT \
     --enable-fortran \
     --with-hdf5=$HDF5_ROOT \
-    --with-nc-cofig=$NETCDF4_ROOT/bin \
+    --with-nc-config=$NETCDF4_ROOT/bin/nc-config \
     --with-x \
     --with-udunits2_incdir=$UDUNITS2_ROOT/include \
     --with-udunits2_libdir=$UDUNITS2_ROOT/lib \
