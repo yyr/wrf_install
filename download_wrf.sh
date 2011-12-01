@@ -23,15 +23,15 @@ function download_package()
         clean_line $pack $x
     done
 
-    echo rm ${APP}.${EXT} \# $APP >> $CLEAN_DOWN
-    echo rm -rf ${DIR} \# $APP >> $CLEAN_SRC
+    echo rm ${APP}.${EXT} \# $pack >> $CLEAN_DOWN
+    echo rm -rf ${DIR} \# $pack >> $CLEAN_SRC
     case ${EXT} in
         *".gz"|*"tgz" )
-            echo tar xzvf ${APP}.${EXT} \# $APP >> $EXTRACT_SRC ;;
+            echo tar xzvf ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
         *"zip" )
-            echo unzip ${APP}.${EXT} \# $APP >> $EXTRACT_SRC ;;
+            echo unzip ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
         * )
-            echo echo "dont know how to extract this" ${APP}.${EXT} >> $EXTRACT_SRC ;;
+            echo echo "dont know how to extract this one:" ${APP}.${EXT} >> $EXTRACT_SRC ;;
     esac
 
 }
@@ -54,8 +54,18 @@ function clean_line ()
 ###########################################################################
 # CODE STARTS FORM HERE
 
-all_packages="HDF5 JASPER NETCDF4 SZIP
-   ZLIB JPEG NCO WPS WRF GRADS WGRIB2" # env files should be present in the SCRIPTS_DIR
+all_packages="HDF5
+JASPER
+NETCDF4
+SZIP
+ZLIB
+JPEG
+NCO
+NCVIEW
+WPS
+WRF
+GRADS
+WGRIB2" # env files should be present in the SCRIPTS_DIR
 
 # check needed environment variables are present or not
 env_error=24
