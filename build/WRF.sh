@@ -6,8 +6,9 @@ cd $WRF_BASE/src
 mv ${DIR} $WRF_ROOT
 cd $WRF_ROOT
 
-# ./configure < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select
-./configure < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select
+./clean -a         # clean first
+./configure # < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select
 
-$SCRIPTS_DIR/build/configure.wrf.hdf5.sh
-./compile em_real &> compile.log
+# read dummy                            # manual inspection
+#$SCRIPTS_DIR/build/configure.wrf.hdf5.sh
+./compile em_real  2>&1 | tee log.${COMP}.compile
