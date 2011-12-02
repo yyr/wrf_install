@@ -1,7 +1,11 @@
 # location of automation scripts
 export SCRIPTS_DIR=~/git/wrf_install
-
-# WRF
 export WRF_BASE=~/wrf
+
+# SYSTEM specific
+#export arch=amur                # sgi altix
+export arch=ubuntu               # ubuntu 64
+
+# COMPILER
 . $SCRIPTS_DIR/INTEL.env
 # . $SCRIPTS_DIR/GCC.env
