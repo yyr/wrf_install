@@ -11,7 +11,9 @@ cd $WRF_ROOT
 
 ## auto tweak resulted configure.wrf (common issues followed by system specific)
 $SCRIPTS_DIR/build/configure.wrf.hdf5.sh
-#$SCRIPTS_DIR/build/configure.wrf.sgi.intel.sh # sgi mpi instead of mpich2
+
+### machine specific tweaks (machine is set in bashrc)
+$SCRIPTS_DIR/build/configure.wrf.${machine}.${COMP}.sh
 
 # read dummy                            # manual inspection
 
