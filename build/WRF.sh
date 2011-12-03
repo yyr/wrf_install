@@ -17,4 +17,4 @@ $SCRIPTS_DIR/build/configure.wrf.${machine}.${COMP}.sh
 
 # read dummy                            # manual inspection
 
-# ./compile em_real  2>&1 | tee log.${COMP}.compile
+./compile em_real  2>&1 | tee log.${COMP}.compile

@@ -6,7 +6,7 @@ compiler=INTEL
 
 # SYSTEM specific
 export machine=sgi                # sgi altix
-export machine=ubuntu             # ubuntu 64
+#export machine=ubuntu             # ubuntu 64
 
 
 # ------------------------------------------
