@@ -3,8 +3,8 @@ export SCRIPTS_DIR=~/git/wrf_install
 export WRF_BASE=~/wrf
 
 # SYSTEM specific
-#export arch=amur                # sgi altix
-export arch=ubuntu               # ubuntu 64
+export machine=sgi                # sgi altix
+# export machine=ubuntu             # ubuntu 64
 
 # COMPILER
 . $SCRIPTS_DIR/INTEL.env
