@@ -1,16 +1,24 @@
 # location of automation scripts
 export WRF_BASE=~/wrf
 export SCRIPTS_DIR=~/git/wrf_install
-compiler=INTEL
+compiler=XL
+#compiler=INTEL
 #compiler=GCC
 
 # SYSTEM specific
-export machine=sgi                # sgi altix
+#export machine=sgi                # sgi altix
 #export machine=ubuntu             # ubuntu 64
-
+export machine=sr16000             # hitachi aix machine
 
 # ------------------------------------------
 #
+# symple check
+if [ ! $0 == "bash" ]; then
+    echo "--: please source me instead as shown below :--"
+    echo "source ${0##*/}"
+    exit
+fi
+
 echo '*****************************************************************'
 echo compiler=$compiler
 echo machine=$machine
