@@ -100,7 +100,7 @@ while [ $counter -le $# ]; do
                 package="${envfile%.[^.]*}" # strip out ".env"
                 . $SCRIPTS_DIR/${envfile} &>/dev/null
                 if [ ! -z $URL ]; then
-                    echo download_package $URL
+                    download_package $URL
                 fi
                 [ $? == 0 ] && update_util_files $package
             done
