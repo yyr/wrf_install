@@ -1,39 +1,19 @@
 #!/bin/bash
+# download apps from env
 
 function download_package()
 {
-    pack=$1
-    echo Downloading... ${pack}
+    echo "Downloading.... $APP"
     echo
-    . $SCRIPTS_DIR/${pack}.env
-    wget -c ${URL} -P $WRF_BASE/src
-
+    wget -c $@ -P $BASE/src
     if [ $? -ne 0 ]; then
-        echo "FAILED TO DOWNLOAD.. $pack ;("
-            return 64
+        echo "FAILED TO DOWNLOAD.. $APP ;("
+        return 64
     else
         echo
-        echo "Finished Downloading... $pack :)"
+        echo "Finished Downloading... $APP :)"
     fi
-
-#    touch  $WRF_BASE/src/${APP}.${EXT} # for test
-
-    # update generated scripts
-    for x in $util_scr; do
-        clean_line $pack $x
-    done
-
-    echo rm ${APP}.${EXT} \# $pack >> $CLEAN_DOWN
-    echo rm -rf ${DIR} \# $pack >> $CLEAN_SRC
-    case ${EXT} in
-        *".gz"|*"tgz" )
-            echo tar xzvf ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
-        *"zip" )
-            echo unzip ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
-        * )
-            echo echo "dont know how to extract this one:" ${APP}.${EXT} >> $EXTRACT_SRC ;;
-    esac
-
+    return 0
 }
 
 function shebang ()
@@ -51,31 +31,43 @@ function clean_line ()
     perl -i -ne "print unless m!$1!" $2
 }
 
+function update_util_files()
+{
+    echo arg: $1
+    pack=$1
+   # update generated scripts
+    for x in $util_scr; do
+        echo clean_line $1 $x
+    done
+
+    echo rm ${APP}.${EXT} \# $pack >> $CLEAN_DOWN
+    echo rm -rf ${DIR} \# $pack >> $CLEAN_SRC
+    case ${EXT} in
+        *".gz"|*"tgz" )
+            echo tar xzvf ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
+        *"zip" )
+            echo unzip ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
+        * )
+            echo echo "dont know how to extract this one:" ${APP}.${EXT} >> $EXTRACT_SRC ;;
+    esac
+}
+
 ###########################################################################
 # CODE STARTS FORM HERE
+if [ $# -lt 1 ]
+then
+    echo "${#} arguments."
+    echo "USAGE: $0 <all|app>"
+    exit 4
+fi
 
-all_packages="
-SZIP
-ZLIB
-JPEG
-JASPER
-HDF5
-MPICH
-NETCDF4
-UDUNITS2
-WPS
-WRF
-NCO
-VAPOR
-NCVIEW
-WGRIB2
-GRADS
-" # env files should be present in the SCRIPTS_DIR
+export BASE=$WRF_BASE
+SCRIPTS_DIR=${SCRIPTS_DIR:-$(pwd)}
 
 # check needed environment variables are present or not
 env_error=24
-if [ -z $WRF_BASE ]; then
-    echo WRF_BASE variable is empty
+if [ -z $BASE ]; then
+    echo BASE variable is empty
     echo please set that to know where to download files
     exit $env_error
 elif [ -z $SCRIPTS_DIR ]; then
@@ -84,12 +76,12 @@ elif [ -z $SCRIPTS_DIR ]; then
     exit $env_error
 fi
 
-mkdir -p $WRF_BASE/src      # Setup source directory
+mkdir -p $BASE/src      # Setup source directory
 
 # prepare utilitly scripts
-CLEAN_DOWN=$WRF_BASE/src/wrf_clean_downloads.sh
-CLEAN_SRC=$WRF_BASE/src/wrf_clean_source.sh
-EXTRACT_SRC=$WRF_BASE/src/wrf_extract_source.sh
+CLEAN_DOWN=$BASE/src/clean_downloads.sh
+CLEAN_SRC=$BASE/src/clean_source.sh
+EXTRACT_SRC=$BASE/src/extract_source.sh
 
 util_scr="$CLEAN_SRC $CLEAN_DOWN $EXTRACT_SRC"
 for f in $util_scr ; do
@@ -98,31 +90,30 @@ done
 
 #
 counter=0
-echo no of args: $#
 while [ $counter -le $# ]; do
     case $1 in
         all|ALL)
-            packages=$all_packages
-            for package in ${packages}
+            for envfile in `find $SCRIPTS_DIR/ -maxdepth 1 -type f  -name "*.env"`
             do
-                download_package $package
+                unset URL
+                envfile="${envfile##*/}" # strip out path name
+                package="${envfile%.[^.]*}" # strip out ".env"
+                . $SCRIPTS_DIR/${envfile} &>/dev/null
+                if [ ! -z $URL ]; then
+                    echo download_package $URL
+                fi
+                [ $? == 0 ] && update_util_files $package
             done
             exit 0
             ;;
-        hdf*|HDF*)
-            download_package HDF5
-            ;;
-        netcdf*|NETCDF*)
-            download_package NETCDF4
-            ;;
-        mpich|MPICH)
-            download_package MPICH
-            ;;
-        grads|GRADS )
-            download_package GRADS
-            ;;
         *)
-            download_package $1
+            unset URL
+            package="${1%.[^.]*}" # strip out ".env" if available
+            . $SCRIPTS_DIR/${package}.env  &>/dev/null
+            if [ ! -z $URL ]; then
+                download_package $URL
+            fi
+            [ $? == 0 ] && update_util_files $package
             ;;
     esac
 
