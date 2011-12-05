@@ -37,7 +37,7 @@ function update_util_files()
     pack=$1
    # update generated scripts
     for x in $util_scr; do
-        echo clean_line $1 $x
+        clean_line $1 $x
     done
 
     echo rm ${APP}.${EXT} \# $pack >> $CLEAN_DOWN
@@ -61,8 +61,8 @@ then
     exit 4
 fi
 
-export BASE=$WRF_BASE
-SCRIPTS_DIR=${SCRIPTS_DIR:-$(pwd)}
+export BASE=${BASE:-$WRF_BASE}
+export SCRIPTS_DIR=${SCRIPTS_DIR:-$(pwd)}
 
 # check needed environment variables are present or not
 env_error=24
