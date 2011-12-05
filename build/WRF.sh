@@ -1,9 +1,13 @@
 ##!/bin/bash
 . $SCRIPTS_DIR/WRF.env
-cd $WRF_BASE/src
 
-#tar zxf cache/${APP}.${EXT}
-mv ${DIR} $WRF_ROOT
+# check folder is already present
+if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
+    cd $WRF_BASE/src
+    tar zxf cache/${APP}.${EXT}
+    mv ${DIR} $WRF_ROOT
+fi
+
 cd $WRF_ROOT
 
 ./clean -a         # clean first
