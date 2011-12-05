@@ -1,13 +1,14 @@
 # location of automation scripts
 export WRF_BASE=~/wrf
-compiler=XL
-#compiler=INTEL
+#compiler=XL
+compiler=INTEL
 #compiler=GCC
 
 # SYSTEM specific
-#export machine=sgi                # sgi altix
+export machine=sgi                # sgi altix
 #export machine=ubuntu             # ubuntu 64
-export machine=sr16000             # hitachi aix machine
+#export machine=sr16000             # hitachi aix machine
+
 
 ########################################################################
 # ------NO NEED TO EDIT BELOW ----------------
@@ -17,7 +18,7 @@ export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`/..; pwd)
 if [  "$0" == "$BASH_SOURCE" ]; then
     echo "--: please source me instead of running as shown below :--"
     echo "source $BASH_SOURCE"
-    exit
+    exit 2
 fi
 
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
@@ -29,13 +30,34 @@ echo WRF_BASE=$WRF_BASE
 echo SCRIPTS_DIR=$SCRIPTS_DIR
 echo '*****************************************************************'
 echo
-# set envs for the COMPILER
+
+# unset first
+unset COMP CC CFLAGS CXX CXXFLAGS CPP CXXFLAGS FC F77 F9X FFLAGS
+
+# load envis for the COMPILER
 if [ -f $SCRIPTS_DIR/${compiler}.env ]; then
     . $SCRIPTS_DIR/${compiler}.env
 else
     echo ERROR: no file named $SCRIPTS_DIR/${compiler}.env
+    exit 128
 fi
 
+echo "-- Compiler evis are set --
+      -- Summary --"
+echo COMP=$COMP
+echo CC=$CC
+echo CFLAGS=$CFLAGS
+echo
+echo CXX=$CXX
+echo CXXFLAGS=$CXXFLAGS
+echo
+echo CPP=$CPP
+echo CXXCPP=$CXXCPP
+echo
+echo FC=$FC
+echo F77=$F77
+echo F9X=$F9X
+echo FFLAGS=$FFLAGS
 
 # Local Variables:
 # mode: sh
