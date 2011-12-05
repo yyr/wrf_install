@@ -12,14 +12,15 @@ export machine=sr16000             # hitachi aix machine
 ########################################################################
 # ------NO NEED TO EDIT BELOW ----------------
 # simple check
-if [ ! "-$0" == "-bash" ]; then
+export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`/..; pwd)
+
+if [  "$0" == "$BASH_SOURCE" ]; then
     echo "--: please source me instead of running as shown below :--"
-    echo "source ${0##*/}"
+    echo "source $BASH_SOURCE"
     exit
 fi
 
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
-export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`/..; pwd)
 
 echo '*****************************************************************'
 echo compiler=$compiler
