@@ -17,4 +17,4 @@ $SCRIPTS_DIR/build/configure.wps.jasper.sh
 
 # read dummy                      # manual inspection
 
-#./compile  2>&1 | tee log.${COMP}.compile
+./compile  2>&1 | tee log.${COMP}.compile
