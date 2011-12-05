@@ -1,6 +1,5 @@
 # location of automation scripts
 export WRF_BASE=~/wrf
-export SCRIPTS_DIR=~/git/wrf_install
 compiler=XL
 #compiler=INTEL
 #compiler=GCC
@@ -10,14 +9,17 @@ compiler=XL
 #export machine=ubuntu             # ubuntu 64
 export machine=sr16000             # hitachi aix machine
 
-# ------------------------------------------
-#
-# symple check
-if [ ! $0 == "bash" ]; then
-    echo "--: please source me instead as shown below :--"
+########################################################################
+# ------NO NEED TO EDIT BELOW ----------------
+# simple check
+if [ ! "-$0" == "-bash" ]; then
+    echo "--: please source me instead of running as shown below :--"
     echo "source ${0##*/}"
     exit
 fi
+
+# figure out absolute path of our repository; and bind it SCRIPTS_DIR
+export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`/..; pwd)
 
 echo '*****************************************************************'
 echo compiler=$compiler
@@ -27,7 +29,12 @@ echo SCRIPTS_DIR=$SCRIPTS_DIR
 echo '*****************************************************************'
 echo
 # set envs for the COMPILER
-. $SCRIPTS_DIR/${compiler}.env
+if [ -f $SCRIPTS_DIR/${compiler}.env ]; then
+    . $SCRIPTS_DIR/${compiler}.env
+else
+    echo ERROR: no file named $SCRIPTS_DIR/${compiler}.env
+fi
+
 
 # Local Variables:
 # mode: sh
