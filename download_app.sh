@@ -1,17 +1,18 @@
 #!/bin/bash
 # download apps from env
-
 function download_package()
 {
+    RESET='\e[0m'
+    RED="\E[31m"
+    GREEN='\E[32m'
     echo "Downloading.... $APP"
-    echo
     wget -c $@ -P $BASE/src
     if [ $? -ne 0 ]; then
-        echo "FAILED TO DOWNLOAD.. $APP ;("
+        echo -e "$RED FAILED TO DOWNLOAD.. $APP ;($RESET"
         return 64
     else
         echo
-        echo "Finished Downloading... $APP :)"
+        echo -e "$GREEN Finished Downloading... $APP :)$RESET"
     fi
     return 0
 }
@@ -33,7 +34,6 @@ function clean_line ()
 
 function update_util_files()
 {
-    echo arg: $1
     pack=$1
    # update generated scripts
     for x in $util_scr; do

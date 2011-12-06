@@ -42,7 +42,7 @@ else
     exit 128
 fi
 
-echo "-- Compiler evis are set --
+echo "-- Compiler vars are set --
       -- Summary --"
 echo COMP=$COMP
 echo CC=$CC
