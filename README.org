@@ -1,10 +1,49 @@
 
-* INTRO
+* Introduction
+Building wrf model is tedious. These are bunch of shell scripts to
+automate the downloading and building process. these scripts are very
+much workable state. This is first written by Rick Morgans.
+
+I have successfully built (automated)
+on UBUNTU with both gcc and intel compilers
+on SGI altix with  gcc and intel
+
 * How to Use
+start with sourcing the SOURCEME file. By default building process
+will be in ~ ~/wrf ~ directory. Edit this if you want to change
+the location of the building. set the compiler option aswell.
+and source the file.
+
+: source SOURCEME
+
+once this is done.  download and extract all the packages we need by
+calling the script ~download_app.sh~
+
+: ./download_app.sh ALL
+
+the packages are downloaded and extracted in ~/wrf/src directory.
+
+and go to the build directory. start building the each by calling
+individual ~.sh~ file or to install all at once call ~ALL.sh~
+
+: cd build
+: ./ALL.sh
+
 * compilers
+the compilers are available for me at work. So
 ** gcc, gfotran
+works by default (my need minor changes)
 ** intel
-** pgf
-** aix
+works by default (my need minor changes)
+** pgf & sgi
+not tested; would be easy to support this I think.
+** aix & ibm compiler
+not yet used
+
 * system wide (mostly with gcc not all the components)
-** gcc
+
+* TODO
+** build on aix machine sr110000 with IBM compiler
+** building individual component by resolving the dependencies
+** allow customizations for which packages to install
+right now these are tightly coupled

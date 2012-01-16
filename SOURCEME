@@ -1,8 +1,8 @@
 # location of automation scripts
 export WRF_BASE=~/wrf
-#compiler=XL
-compiler=INTEL
-#compiler=GCC
+#compiler=XL  # sgi pgf compiler
+compiler=INTEL # intel compiler
+#compiler=GCC #gcc and gfortran
 
 # SYSTEM specific
 export machine=sgi                # sgi altix
@@ -13,7 +13,7 @@ export machine=sgi                # sgi altix
 ########################################################################
 # ------NO NEED TO EDIT BELOW ----------------
 # simple check
-export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`/..; pwd)
+export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 
 if [  "$0" == "$BASH_SOURCE" ]; then
     echo "--: please source me instead of running as shown below :--"
