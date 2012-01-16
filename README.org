@@ -5,8 +5,8 @@ automate the downloading and building process. these scripts are very
 much workable state. This is first written by Rick Morgans.
 
 I have successfully built (automated)
-on UBUNTU with both gcc and intel compilers
-on SGI altix with  gcc and intel
+- on UBUNTU with both gcc and intel compilers
+- on SGI altix with  gcc and intel
 
 * How to Use
 start with sourcing the SOURCEME file. By default building process
@@ -42,7 +42,7 @@ not yet used
 
 * system wide (mostly with gcc not all the components)
 
-* TODO
+* TODO next
 ** build on aix machine sr110000 with IBM compiler
 ** building individual component by resolving the dependencies
 ** allow customizations for which packages to install
