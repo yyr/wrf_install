@@ -44,11 +44,17 @@ function update_util_files()
     echo rm -rf ${DIR} \# $pack >> $CLEAN_SRC
     case ${EXT} in
         *".gz"|*"tgz" )
+            cd $BASE/src
+            tar xzvf ${APP}.${EXT}
             echo tar xzvf ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
         *"zip" )
+            cd $BASE/src
+            unzip ${APP}.${EXT}
             echo unzip ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
         * )
-            echo echo "dont know how to extract this one:" ${APP}.${EXT} >> $EXTRACT_SRC ;;
+            echo "dont know how to extract this one:" ${APP}.${EXT}
+            echo echo "dont know how to extract this one:" ${APP}.${EXT} >> $EXTRACT_SRC
+            ;;
     esac
 }
 
