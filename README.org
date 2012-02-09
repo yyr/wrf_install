@@ -29,6 +29,16 @@ individual ~.sh~ file or to install all at once call ~ALL.sh~
 : cd build
 : ./ALL.sh
 
+
+* Contributing
+I welcome any patches/reports/suggestions. send a mail to
+[[mailto:yagensh◎live.com][me]](replace Unicode character).  or you
+can fork on github.
+
+source repository:
+https://github.com/yyr/wrf_install
+
+
 * compilers
 the compilers are available for me at work. So
 ** gcc, gfotran

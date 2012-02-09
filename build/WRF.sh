@@ -4,7 +4,7 @@
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     cd $WRF_BASE/src
-    tar zxf cache/${APP}.${EXT}
+    tar zxf ${APP}.${EXT}
     mv ${DIR} $WRF_ROOT
 fi
 
