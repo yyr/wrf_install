@@ -34,11 +34,6 @@ To test how it works..
 
 try to install one component.. Follow these steps.
 
-Download the files (zip/tarball).
-unzip/untar
-
-goto the the directory yyr-wrf_install-*
-
 open the SOURCEME file with your editor
 you may want to customize these options;
 - location of install (WRF_BASE variable)
