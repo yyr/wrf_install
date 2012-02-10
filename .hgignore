@@ -1,9 +1,0 @@
-syntax: glob
-*~
-src*
-bin*
-gcc/*
-intel/*
-
-syntax: regexp
-(.*/)?\#[^/]*\#$
