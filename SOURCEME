@@ -5,7 +5,7 @@ export WRF_BASE=~/wrf
 # | INTEL  | for intel compilers     |
 # | PGF    | pgf compilers           |
 # | GCC    | gcc & gfortan compilers |
-compiler=INTEL
+compiler=GCC
 
 # -------------------
 # SYSTEM specific
@@ -13,7 +13,7 @@ compiler=INTEL
 # | sgi     | sgi altix           |
 # | ubuntu  | 64 bit ubuntu       |
 # | sr16000 | hitachi AIX machine |
-export machine=sgi
+export machine=ubuntu
 
 
 ########################################################################
@@ -41,10 +41,10 @@ echo
 unset COMP CC CFLAGS CXX CXXFLAGS CPP CXXFLAGS FC F77 F9X FFLAGS
 
 # load envis for the COMPILER
-if [ -f $SCRIPTS_DIR/${compiler}.env ]; then
-    . $SCRIPTS_DIR/${compiler}.env
+if [ -f $SCRIPTS_DIR/compiler/${compiler}.env ]; then
+    . $SCRIPTS_DIR/compiler/${compiler}.env
 else
-    echo ERROR: no file named $SCRIPTS_DIR/${compiler}.env
+    echo ERROR: no file named $SCRIPTS_DIR/compiler/${compiler}.env
     exit 128
 fi
 
