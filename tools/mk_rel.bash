@@ -1,10 +1,8 @@
-#!/bin/sh
-
-set -e
+#!/bin/bash
 
 function mk_dist()
 {
-    VERSION=$(git describe --tags --dirty)
+    VERSION=$(git describe --tags)
     git archive --format=tar --output wrf_install-$VERSION.tar  $VERSION
     gzip wrf_install-$VERSION.tar
 }
