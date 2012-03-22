@@ -1,13 +1,19 @@
-# location of automation scripts
+# directory where installation takes place
 export WRF_BASE=~/wrf
-#compiler=XL  # sgi pgf compiler
-compiler=INTEL # intel compiler
-#compiler=GCC #gcc and gfortran
 
+# |--------+-------------------------|
+# | INTEL  | for intel compilers     |
+# | PGF    | pgf compilers           |
+# | GCC    | gcc & gfortan compilers |
+compiler=INTEL
+
+# -------------------
 # SYSTEM specific
-export machine=sgi                # sgi altix
-#export machine=ubuntu             # ubuntu 64
-#export machine=sr16000             # hitachi aix machine
+# |---------+---------------------|
+# | sgi     | sgi altix           |
+# | ubuntu  | 64 bit ubuntu       |
+# | sr16000 | hitachi AIX machine |
+export machine=sgi
 
 
 ########################################################################
