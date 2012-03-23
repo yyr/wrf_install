@@ -1,3 +1,11 @@
+[this file is written in orgmode markeup]
+
+wrf_install is collection of shell scripts to automate the processing
+of downloading and building wrf model and its dependencies on veriety of
+machines with different compilers.
+
+Website: https://github.com/yyr/wrf_install
+
 * Introduction
 Building wrf model is tedious. These are bunch of shell scripts to
 automate the downloading and building process. these scripts are very
@@ -75,13 +83,12 @@ in the build directory)
 - WPS
 
 * Contributing
-I welcome any patches/reports/suggestions. send a mail to
-[[mailto:yagensh◎live.com][me]](replace Unicode character).  or you
-can fork on github and send a pull request.
+I welcome any patches/reports/suggestions. Drop [[mailto:yagensh◎live.com][me]] a mail (replace
+Unicode character) or report on github repository.
 
-source repository:
-https://github.com/yyr/wrf_install
+https://github.com/yyr/wrf_install/issues
 
+please report any problems or
 
 * Compilers
 the compilers are available for me at work. So
@@ -95,6 +102,9 @@ not tested; would be easy to support this I think.
 not yet used
 
 * system wide (mostly with gcc not all the components)
+
+* faq
+check ~faq.org~ file in ~doc~ folder
 
 * TODO next
 ** building individual component by resolving the dependencies
