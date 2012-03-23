@@ -98,18 +98,13 @@ please report any problems or
 * compilers supported by wrf_install
 for now gcc and intel.
 
+These compilers are available for me at school. So I could test them.
 
-the compilers are available for me at work. So
-** gcc, gfotran
-works by default (may need minor changes)
-** intel
-works by default (may need minor changes)
-** pgf & sgi
-not tested; would be easy to support this I think.
-** aix & ibm compiler
-not yet used
-
-* system wide (mostly with gcc not all the components)
+| compiler | system  | state   | remarks                |
+|----------+---------+---------+------------------------|
+| gcc      | linux   | works   | may need minor changes |
+| intel    | linux   | works   | may need minor changes |
+| XL       | ibm aix | not yet | need to implement      |
 
 * faq
 check ~faq.org~ file in ~doc~ folder
