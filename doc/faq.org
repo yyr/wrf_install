@@ -1,4 +1,8 @@
 
+* SOURCEME problems
+** source command not found.?
+change your shell to bash.
+
 * wrf
 ** error loading so libnetcdff.so.5
 error message looks like this
