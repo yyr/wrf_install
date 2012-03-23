@@ -44,15 +44,18 @@ try to install one component.. Follow these steps.
 
 open the SOURCEME file with your editor
 you may want to customize these options;
-- location of install (WRF_BASE variable)
-  by default ~/wrf is the folder all the downloads and installation takes place.
+- Directory where installation should take place. (WRF_BASE variable)
 
-- which compilers you want to use
-  by default it is intel. if you have GNU gcc instead of intel
-  compilers. change them accordingly.  (there is an example how to set ,
-  it must be easy)
+  By default "~/wrf" is the folder all the downloads and installation
+  takes place.
 
-OKAY now lets try to install zlib first
+- which compilers you want to use.
+
+  By default it is GNU gcc.  If you have intel instead of GNU gcc
+  compilers. change them accordingly (there is an example how to set,
+  it must be easy).
+
+OKAY now lets try to install ~zlib~ first
 
 #+BEGIN_SRC sh
 . SOURCEME # this is where you start
@@ -61,11 +64,13 @@ cd build # goto the directory where build scripts are located
 ./ZLIB.sh
 #+END_SRC
 
-that's it.. if everything goes well you have just installed zlib. see
-in the $WRF_BASE directory.
+that's it..
+If everything goes well you have just built and installed ~zlib~. see
+in the $WRF_BASE/$compiler directory.
 
-I strongly *suggest* you to install the components one by one at the first
-time.. So its easy for you to see what is going on..
+I strongly *suggest* you to install the components one by one for the first
+time around. So its easy for you to see what is going on and
+understand how these script work.
 
 these are the components you can install.(each one has its ?.sh file
 in the build directory)
@@ -90,12 +95,15 @@ https://github.com/yyr/wrf_install/issues
 
 please report any problems or
 
-* Compilers
+* compilers supported by wrf_install
+for now gcc and intel.
+
+
 the compilers are available for me at work. So
 ** gcc, gfotran
-works by default (my need minor changes)
+works by default (may need minor changes)
 ** intel
-works by default (my need minor changes)
+works by default (may need minor changes)
 ** pgf & sgi
 not tested; would be easy to support this I think.
 ** aix & ibm compiler
