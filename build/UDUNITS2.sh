@@ -1,7 +1,4 @@
 #!/bin/bash
-. $SCRIPTS_DIR/ZLIB.env
-. $SCRIPTS_DIR/SZIP.env
-. $SCRIPTS_DIR/HDF5.env
 . $SCRIPTS_DIR/UDUNITS2.env
 cd $WRF_BASE/src/
 cd ${DIR}
