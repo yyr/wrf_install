@@ -2,6 +2,13 @@
 . $SCRIPTS_DIR/WRF.env
 . $SCRIPTS_DIR/WPS.env
 
+export NETCDF=${NETCDF4_ROOT}
+export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+export WRF_EM_CORE=1
+export WRF_DA_CORE=0
+export JASPERLIB=${JASPER_ROOT}/lib
+export JASPERINC=${JASPER_ROOT}/include
+
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     cd $WRF_BASE/src
