@@ -1,3 +1,4 @@
+# -*- mode: org; -*-
 [this file is written in orgmode markeup]
 
 wrf_install is collection of shell scripts to automate the processing
@@ -10,10 +11,6 @@ Website: https://github.com/yyr/wrf_install
 Building wrf model is tedious. These are bunch of shell scripts to
 automate the downloading and building process. these scripts are very
 much workable state. This is first written by Rick Morgans.
-
-I have successfully built (automated)
-- on UBUNTU with both gcc and intel compilers
-- on SGI altix with  gcc and intel
 
 * How to Use
 ** quick read
@@ -46,14 +43,14 @@ open the SOURCEME file with your editor
 you may want to customize these options;
 - Directory where installation should take place. (WRF_BASE variable)
 
-  By default "~/wrf" is the folder all the downloads and installation
-  takes place.
+By default "~/wrf" is the folder all the downloads and installation
+takes place.
 
 - which compilers you want to use.
 
-  By default it is GNU gcc.  If you have intel instead of GNU gcc
-  compilers. change them accordingly (there is an example how to set,
-  it must be easy).
+By default it is GNU gcc.  If you have intel instead of GNU gcc
+compilers. change them accordingly (there is an example how to set,
+it must be easy).
 
 OKAY now lets try to install ~zlib~ first
 
@@ -87,15 +84,26 @@ in the build directory)
 - WRF
 - WPS
 
-* Contributing
-I welcome any patches/reports/suggestions. Drop [[mailto:yagensh◎live.com][me]] a mail (replace
-Unicode character) or report on github repository.
+* How it works
+Whole these script are meant to bring consistency in setting up
+environment variables. When ~SOURCEME~ file is sourced, it will set
+WRF_BASE variable and compiler options. (see the ~compiler~ directory
+to modify the compiler options)
 
-https://github.com/yyr/wrf_install/issues
+Each app has env file which contains few properties(eg., /URL/ from
+where that app can be downloaded) of that APP. FOR eg., zlib app has a
+file called ~ZLIB.env~.
 
-please report any problems or
+In the same way each app has a file named ~APP.sh~ in build directory
+which takes care of installation process while learning about its
+properties from env file and its dependencies env files. Luckily all
+dependency apps are built by GNU utilities autoconf, configure and make. So
+almost no manual interventions are needed.
 
-* compilers supported by wrf_install
+Finally building WRF/WPS app is tricky because these won't use make
+directly. So some compiler options and path need to change.
+
+* Compilers supported by wrf_install
 for now gcc and intel.
 
 These compilers are available for me at school. So I could test them.
@@ -106,14 +114,18 @@ These compilers are available for me at school. So I could test them.
 | intel    | linux   | works   | may need minor changes |
 | XL       | ibm aix | not yet | need to implement      |
 
-* faq
+* FAQ
 check ~faq.org~ file in ~doc~ folder
 
-* TODO next
-** building individual component by resolving the dependencies
-dependency resolving is not possible right now.. you need to install
-the specific order..
+* Contributing
+I welcome any patches/reports/suggestions. Drop [[mailto:yagensh◎live.com][me]] a mail (replace
+Unicode character) or report on github repository.
 
-** build on aix machine sr110000 with IBM compiler
-** allow customizations for which packages to install
-right now these are tightly coupled
+https://github.com/yyr/wrf_install/issues
+
+please report any problems or
+
+* TODO Next
+- resolving dependencies
+- support more compiler and OS
+- customized set of dependencies installation
