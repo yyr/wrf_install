@@ -30,12 +30,12 @@ fi
 
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
 
-echo '*****************************************************************'
+echo '================================================================='
 echo compiler=$compiler
 echo machine=$machine
 echo WRF_BASE=$WRF_BASE
 echo SCRIPTS_DIR=$SCRIPTS_DIR
-echo '*****************************************************************'
+echo '================================================================='
 echo
 
 # unset first
@@ -53,8 +53,11 @@ else
     exit 128
 fi
 
-echo "-- Compiler vars are set --
-      -- Summary --"
+echo " ** IMPORTANT **
+Compiler flags are set. If like to change any of these, go change in \"$SCRIPTS_DIR/${compiler}/compiler.env\"
+and source this file again.
+"
+echo '-----------------------------------------------------------------'
 echo COMP=$COMP
 echo CC=$CC
 echo CFLAGS=$CFLAGS
@@ -69,6 +72,7 @@ echo FC=$FC
 echo F77=$F77
 echo F9X=$F9X
 echo FFLAGS=$FFLAGS
+echo '-----------------------------------------------------------------'
 
 # Local Variables:
 # mode: sh
