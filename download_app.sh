@@ -68,7 +68,6 @@ then
 fi
 
 export BASE=${BASE:-$WRF_BASE}
-export SCRIPTS_DIR=${SCRIPTS_DIR:-$(pwd)}
 
 # check needed environment variables are present or not
 env_error=24
