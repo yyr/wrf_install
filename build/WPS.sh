@@ -1,4 +1,5 @@
 ##!/bin/bash
+. $SCRIPTS_DIR/WRF.env
 . $SCRIPTS_DIR/WPS.env
 
 # check folder is already present
