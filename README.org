@@ -7,11 +7,11 @@ machines with different compilers.
 Website: https://github.com/yyr/wrf_install
 
 * Introduction
-Building wrf model is tedious. These are bunch of shell scripts to
+Building wrf model is tedious. wrf_install is collection of shell scripts to
 automate the downloading and building process. these scripts are very
 much workable state. This is first written by Rick Morgans.
 
-* How to Use
+* How to Use?
 ** quick read
 start with sourcing the SOURCEME file. By default building process
 will be in ~ ~/wrf ~ directory. Edit this if you want to change
@@ -83,7 +83,7 @@ in the build directory)
 - WRF
 - WPS
 
-* How it works
+* How it works?
 wrf_install is meant to bring consistency in setting up environment
 variables. When ~SOURCEME~ file is sourced, it will set WRF_BASE
 variable and compiler options. (see the ~compiler~ directory to modify
@@ -102,6 +102,22 @@ almost no manual interventions are needed.
 Finally building WRF/WPS app is tricky because these won't use make
 directly. So some compiler options and path need to change.
 
+* How to customize then?
+** Compiler options
+As it is said in previous section when you source the ~SOURCEME~ file
+it invokes ~compiler.env~ to get compiler setting.  For gcc you need
+to customize ~$SCRIPTS_DIR/gcc/compiler.env~ file.
+
+** configure options
+build directory contains individual build scripts. Customize them
+accordingly.
+
+** WRF & WPS
+selection different options in the (wrf/wps) configure script is
+automated feeding configure.wrf.gcc.select in the stdin. So customize
+them to your need. By default serial built is configured.  Also read
+the comments in the ~WRF.sh~ and ~WPS.sh~ files
+
 * Compilers supported by wrf_install
 for now gcc and intel.
 
@@ -117,14 +133,9 @@ These compilers are available for me at school. So I could test them.
 check ~faq.org~ file in ~doc~ folder
 
 * Contributing
-I welcome any patches/reports/suggestions. Drop [[mailto:yagensh◎live.com][me]] a mail (replace
+Any patches/reports/suggestions are most welcome. Drop [[mailto:yagensh◎live.com][me]] a mail (replace
 Unicode character) or report on github repository.
-
 https://github.com/yyr/wrf_install/issues
 
-please report any problems or
-
-* TODO Next
-- resolving dependencies
-- support more compiler and OS
-- customized set of dependencies installation
+* TODOs
+Check dev.org file
