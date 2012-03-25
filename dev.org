@@ -1,7 +1,11 @@
 
-* TODO write status file of each app
+* NEXT write status file of each app
+status of each may be
+- installed
+- broken
+- installed with these dependencies
 
 * TODO writing parts of wrf_install with perl
-it makes sense because installing wrf needs perl anyway. so we are
-imposing any new dependency. But version of perl needed should as old
+it makes sense because installing wrf needs perl anyway. so we are not
+imposing any new dependency. But version of perl required should as old
 as possible
