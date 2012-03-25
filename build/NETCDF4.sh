@@ -8,6 +8,12 @@ for dep in ${DEP[@]}; do # soruce dep envs
 done
 source $appsdir/NETCDF4.env              # retain app name and other details
 
+# export CPPFLAGS="$CPPFLAGS -I${HDF5_ROOT}/include \
+#   -I${ZLIB_ROOT}/include \
+#   -I${SZIP_ROOT}/include"
+# export LDFLAGS="$LDFLAGS -L${HDF5_ROOT}/lib \
+#    -L${ZLIB_ROOT}/lib \
+#    -L${SZIP_ROOT}/lib"
 
 ./configure \
     --prefix=$NETCDF4_ROOT \

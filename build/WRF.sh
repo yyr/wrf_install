@@ -24,12 +24,13 @@ export JASPERINC=${JASPER_ROOT}/include
 ./clean -a         # clean first
 ./configure  < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select
 
-## auto tweak resulted configure.wrf (common issues followed by system specific)
-$SCRIPTS_DIR/build/configure.wrf.hdf5.sh
+## common problems of configure.wrf should be fixed in the following script
+$SCRIPTS_DIR/build/fix.configure.wrf.sh
 
-### machine specific tweaks (machine is set in bashrc)
-$SCRIPTS_DIR/build/configure.wrf.${machine}.${COMP}.sh
+### machine specific tweaks
+# for eg if you want to change configure.wrf file put some code in your
+# check fix.configure.wrf.intel.sh
+$SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
 
-# read dummy                            # manual inspection
-
+# # read dummy                            # manual inspection
 ./compile em_real  2>&1 | tee log.${COMP}.compile

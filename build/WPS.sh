@@ -24,9 +24,15 @@ export JASPERINC=${JASPER_ROOT}/include
 
 ./clean -a # clean first
 ./configure  < $SCRIPTS_DIR/build/configure.wps.${COMP}.select
-$SCRIPTS_DIR/build/configure.wps.hdf5.sh
-$SCRIPTS_DIR/build/configure.wps.jasper.sh
+
+## common problems of configure.wps should be fixed in the following script
+$SCRIPTS_DIR/build/fix.configure.wps.sh
+
+### machine specific tweaks
+# for eg if you want to change configure.wps file put some code in your
+# check fix.configure.wrf.intel.sh
+$SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh
+
 
 # read dummy                      # manual inspection
-
 ./compile  2>&1 | tee log.${COMP}.compile
