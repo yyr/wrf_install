@@ -37,18 +37,20 @@ function extract_package()
     pack=$1
     appsrc=${APP}.${EXT}
     extractlog=${APP}.${EXT}.extraction.log
+    logdir=$BASE/src/log
     cd $BASE/src
     if [ -d ${DIR} ]; then
         rm -r ${DIR}        # remove previouly extracted things
     fi
+    mkdir -p $logdir
     case ${EXT} in
         *"gz"|*"tgz" )
-            tar xzvf $appsrc &> $extractlog &&
-            echo "extracted and log written in $extractlog"
+            tar xzvf $appsrc &> $logdir/$extractlog &&
+            echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         *"zip" )
-            unzip $appsrc &> $extractlog &&
-            echo extracted and log written in $extractlog
+            unzip $appsrc &> $logdir/$extractlog &&
+            echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         * )
             echo  "dont know how to extract this one:" ${APP}.${EXT}
