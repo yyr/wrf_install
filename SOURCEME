@@ -20,6 +20,7 @@ export machine=ubuntu
 ########################################################################
 # ------NO NEED TO EDIT BELOW ----------------
 # simple check
+# figure out absolute path of our repository; and bind it SCRIPTS_DIR
 export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 
 if [  "$0" == "$BASH_SOURCE" ]; then
@@ -28,8 +29,10 @@ if [  "$0" == "$BASH_SOURCE" ]; then
     exit 2
 fi
 
-# figure out absolute path of our repository; and bind it SCRIPTS_DIR
+# some internal varialbles
+export appsdir=$SCRIPTS_DIR/apps
 
+# let user know what kind of set up (s)he asked for
 echo '================================================================='
 echo compiler=$compiler
 echo machine=$machine
