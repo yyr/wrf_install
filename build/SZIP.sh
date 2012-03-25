@@ -1,5 +1,5 @@
 #!/bin/bash
-. $SCRIPTS_DIR/SZIP.env
+. $appsdir/SZIP.env
 cd $WRF_BASE/src/
 cd ${DIR}
 echo $(pwd)
