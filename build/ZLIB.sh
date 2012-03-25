@@ -1,5 +1,5 @@
 #!/bin/bash
-. $SCRIPTS_DIR/ZLIB.env
+. $appsdir/ZLIB.env
 cd $WRF_BASE/src/
 cd ${DIR}
 
