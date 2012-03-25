@@ -54,7 +54,7 @@ it must be easy).
 OKAY now lets try to install ~zlib~ first
 
 #+BEGIN_SRC sh
-. SOURCEME # this is where you start
+source SOURCEME # this is where you start
 ./download_app.sh ZLIB # download zlib and decompress it
 cd build # goto the directory where build scripts are located
 ./ZLIB.sh
