@@ -17,43 +17,24 @@ function download_package()
     return 0
 }
 
-function shebang ()
-{
-    file=$1
-    if [ ! -f $file ]; then
-        echo '#!/bin/bash' > $file
-        chmod +x $file
-        echo '#' >> $file       # just an extra comment line
-    fi
-}
-
-function clean_line ()
-{
-    perl -i -ne "print unless m!$1!" $2
-}
-
-function update_util_files()
+function extract_package()
 {
     pack=$1
-   # update generated scripts
-    for x in $util_scr; do
-        clean_line $1 $x
-    done
-
-    echo rm ${APP}.${EXT} \# $pack >> $CLEAN_DOWN
-    echo rm -rf ${DIR} \# $pack >> $CLEAN_SRC
+    appsrc=${APP}.${EXT}
+    extractlog=${APP}.${EXT}.extraction.log
     case ${EXT} in
         *".gz"|*"tgz" )
             cd $BASE/src
-            tar xzvf ${APP}.${EXT}
-            echo tar xzvf ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
-        *"zip" )
+            tar xzvf $appsrc &> $extractlog &&
+            echo "extracted and log written in $extractlog"
+            ;;
+        *".zip")
             cd $BASE/src
-            unzip ${APP}.${EXT}
-            echo unzip ${APP}.${EXT} \# $pack >> $EXTRACT_SRC ;;
+            unzip $appsrc &> $extractlog &&
+            echo extracted and log written in $extractlog
+            ;;
         * )
-            echo "dont know how to extract this one:" ${APP}.${EXT}
-            echo echo "dont know how to extract this one:" ${APP}.${EXT} >> $EXTRACT_SRC
+            echo  "dont know how to extract this one:" ${APP}.${EXT}
             ;;
     esac
 }
@@ -63,7 +44,7 @@ function update_util_files()
 if [ $# -lt 1 ]
 then
     echo "${#} arguments."
-    echo "USAGE: $0 <all|app>"
+    echo "USAGE: $0 <all|appname>"
     exit 4
 fi
 
@@ -73,57 +54,61 @@ export BASE=${BASE:-$WRF_BASE}
 env_error=24
 if [ -z $BASE ]; then
     echo BASE variable is empty
-    echo please set that to know where to download files
+    echo did you source the SOURCEME file.?
+    echo run \"source SOURCEME\"
     exit $env_error
 elif [ -z $SCRIPTS_DIR ]; then
     echo SCRIPTS_DIR variable is empty
-    echo please set that to know where the env files located
+    echo did you source the SOURCEME file.?
+    echo run \"source SOURCEME\"
     exit $env_error
 fi
 
 mkdir -p $BASE/src      # Setup source directory
 
-# prepare utilitly scripts
-CLEAN_DOWN=$BASE/src/clean_downloads.sh
-CLEAN_SRC=$BASE/src/clean_source.sh
-EXTRACT_SRC=$BASE/src/extract_source.sh
-
-util_scr="$CLEAN_SRC $CLEAN_DOWN $EXTRACT_SRC"
-for f in $util_scr ; do
-    shebang $f
+apps=()
+for envfile in `find $appsdir -maxdepth 1 -type f  -name "*.env"` ; do
+    temp="${envfile##*/}" # strip out path name
+    app="${temp%.[^.]*}" # strip out ".env"
+    apps=(${apps[@]} ${app})
 done
 
+for  app in $apps; do
+    echo $app
+done
+
+unset app
 #
 counter=0
 while [ $counter -le $# ]; do
     case $1 in
         all|ALL)
-            for envfile in `find $SCRIPTS_DIR/ -maxdepth 1 -type f  -name "*.env"`
+            for app in $apps
             do
                 unset URL
-                envfile="${envfile##*/}" # strip out path name
-                package="${envfile%.[^.]*}" # strip out ".env"
-                . $SCRIPTS_DIR/${envfile} &>/dev/null
+                . $appsdir/${app}.env  &>/dev/null
                 if [ ! -z $URL ]; then
                     download_package $URL
                 fi
-                [ $? == 0 ] && update_util_files $package
+                [ $? == 0 ] && extract_package $package
             done
             exit 0
             ;;
         *)
             unset URL
             package="${1%.[^.]*}" # strip out ".env" if available
-            . $SCRIPTS_DIR/${package}.env  &>/dev/null
+            . $appsdir/${package}.env  &>/dev/null
             if [ ! -z $URL ]; then
                 download_package $URL
+            else
+                echo unknown app \"$package\"
+                exit 64
             fi
-            [ $? == 0 ] && update_util_files $package
+            [ $? == 0 ] && extract_package $package
             ;;
     esac
 
     shift
     let counter=counter+1
 done
-
 exit 0
