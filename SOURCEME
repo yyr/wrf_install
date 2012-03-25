@@ -48,6 +48,7 @@ unset COMP CC CFLAGS CXX CXXFLAGS CPP CXXFLAGS FC F77 F9X FFLAGS
 if [ -f $SCRIPTS_DIR/${compiler}/compiler.env ]; then
     . $SCRIPTS_DIR/${compiler}/compiler.env
     if [ $? != 0 ]; then
+        echo "something wrong with: $SCRIPTS_DIR/${compiler}/compiler.env"
         return $?
     fi
 else
