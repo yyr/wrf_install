@@ -7,12 +7,12 @@ if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     tar zxf ${APP}.${EXT}
     mv ${DIR} $WRF_ROOT
 fi
-
 cd $WRF_ROOT
 
 for dep in ${DEP[@]}; do        # soruce dep envs
     source $appsdir/$dep.env
 done
+. $appsdir/WRF.env              # retain app name and other details
 
 export NETCDF=${NETCDF4_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1

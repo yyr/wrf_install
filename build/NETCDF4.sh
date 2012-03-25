@@ -6,7 +6,8 @@ echo $(pwd)
 for dep in ${DEP[@]}; do # soruce dep envs
     source $appsdir/$dep.env
 done
-. $appsdir/NETCDF4.env
+source $appsdir/NETCDF4.env              # retain app name and other details
+
 
 ./configure \
     --prefix=$NETCDF4_ROOT \

@@ -7,10 +7,10 @@
 
 . $appsdir/NCO.env
 cd $WRF_BASE/src/${DIR}
-
 for dep in ${DEP[@]}; do        # soruce dep envs
     source $appsdir/$dep.env
 done
+. $appsdir/NCO.env             # retain app name and other details
 
 export NETCDF4_ROOT
 export NETCDF_INC

@@ -8,9 +8,7 @@ if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     mv ${DIR} $WPS_ROOT
 fi
 cd $WPS_ROOT
-
-. $SCRIPTS_DIR/WRF.env
-. $SCRIPTS_DIR/WPS.env
+. $appsdir/WPS.env              # retain app name and other details
 
 
 for dep in ${DEP[@]}; do        # soruce dep envs

@@ -2,6 +2,7 @@
 . $appsdir/HDF5.env             # find out dependencies
 cd $WRF_BASE/src/${DIR}
 echo $(pwd)
+. $appsdir/HDF5.env             # retain app name and other details
 
 for dep in ${DEP[@]}; do        # soruce dep envs
     source $appsdir/$dep.env
