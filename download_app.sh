@@ -5,6 +5,19 @@ RESET='\e[0m'
 RED="\E[31m"
 GREEN='\E[32m'
 
+function usage()
+{
+    echo
+    echo "      USAGE: $0 <all|appname>"
+    echo
+    echo "where \"appname\" is one of the follwoing"
+    echo "========================================="
+    for app in ${apps[@]}; do
+        echo $app
+    done
+    exit 4
+}
+
 function download_package()
 {
     echo "Downloading.... $APP"
@@ -45,13 +58,6 @@ function extract_package()
 
 ###########################################################################
 # CODE STARTS FORM HERE
-if [ $# -lt 1 ]
-then
-    echo "${#} arguments."
-    echo "USAGE: $0 <all|appname>"
-    exit 4
-fi
-
 export BASE=${BASE:-$WRF_BASE}
 
 # check needed environment variables are present or not
@@ -77,6 +83,13 @@ for envfile in `find $appsdir -maxdepth 1 -type f  -name "*.env"` ; do
     apps=(${apps[@]} ${app})
 done
 
+if [ $# -lt 1 ]
+then
+    echo "${#} arguments."
+    usage $0
+fi
+
+
 unset app
 #
 counter=0
@@ -101,11 +114,8 @@ while [ $counter -le $# ]; do
             if [ ! -z $URL ]; then
                 download_package $URL
             else
-                echo -e "$RED unknown app \"$package\" $RESET\n"
-                echo "Choose one app from the following list; or \"all\" to download all"
-                for app in ${apps[@]}; do
-                    echo $app
-                done
+                echo -e "$RED unknown app \"$package\" $RESET"
+                usage $0
                 exit 64
             fi
             [ $? == 0 ] && extract_package $package
