@@ -1,10 +1,12 @@
 #!/bin/bash
 # download apps from env
+
+RESET='\e[0m'
+RED="\E[31m"
+GREEN='\E[32m'
+
 function download_package()
 {
-    RESET='\e[0m'
-    RED="\E[31m"
-    GREEN='\E[32m'
     echo "Downloading.... $APP"
     wget -c $@ -P $BASE/src
     if [ $? -ne 0 ]; then
@@ -73,10 +75,6 @@ for envfile in `find $appsdir -maxdepth 1 -type f  -name "*.env"` ; do
     apps=(${apps[@]} ${app})
 done
 
-for  app in $apps; do
-    echo $app
-done
-
 unset app
 #
 counter=0
@@ -101,7 +99,11 @@ while [ $counter -le $# ]; do
             if [ ! -z $URL ]; then
                 download_package $URL
             else
-                echo unknown app \"$package\"
+                echo -e "$RED unknown app \"$package\" $RESET\n"
+                echo "Choose one app from the following list; or \"all\" to download all"
+                for app in ${apps[@]}; do
+                    echo $app
+                done
                 exit 64
             fi
             [ $? == 0 ] && extract_package $package
