@@ -3,7 +3,7 @@
 function mk_dist()
 {
     VERSION=$(git describe --tags)
-    git archive --format=tar --output wrf_install-$VERSION.tar  $VERSION
+    git archive --format=tar --output wrf_install-$VERSION.tar --prefix="wrf_install/"  $VERSION
     gzip wrf_install-$VERSION.tar
 }
 
