@@ -107,8 +107,18 @@ while [ $counter -le $# ]; do
                 fi
                 [ $? == 0 ] && extract_package $package
             done
-            exit 0
             ;;
+
+        -e )
+            shift
+            for app in ${apps[@]};
+            do
+                unset URL
+                . $appsdir/${app}.env  &>/dev/null
+                extract_package $package
+            done
+            ;;
+
         *)
             unset URL
             package="${1%.[^.]*}" # strip out ".env" if available
