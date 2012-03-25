@@ -25,7 +25,9 @@ function extract_package()
     appsrc=${APP}.${EXT}
     extractlog=${APP}.${EXT}.extraction.log
     cd $BASE/src
-    rm -r ${DIR}        # remove previouly extracted things
+    if [ -d ${DIR} ]; then
+        rm -r ${DIR}        # remove previouly extracted things
+    fi
     case ${EXT} in
         *"gz"|*"tgz" )
             tar xzvf $appsrc &> $extractlog &&
@@ -81,7 +83,7 @@ counter=0
 while [ $counter -le $# ]; do
     case $1 in
         all|ALL)
-            for app in $apps
+            for app in ${apps[@]};
             do
                 unset URL
                 . $appsdir/${app}.env  &>/dev/null
