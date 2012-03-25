@@ -24,14 +24,14 @@ function extract_package()
     pack=$1
     appsrc=${APP}.${EXT}
     extractlog=${APP}.${EXT}.extraction.log
+    cd $BASE/src
+    rm -r ${DIR}        # remove previouly extracted things
     case ${EXT} in
         *"gz"|*"tgz" )
-            cd $BASE/src
             tar xzvf $appsrc &> $extractlog &&
             echo "extracted and log written in $extractlog"
             ;;
         *"zip" )
-            cd $BASE/src
             unzip $appsrc &> $extractlog &&
             echo extracted and log written in $extractlog
             ;;
