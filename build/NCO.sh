@@ -5,13 +5,12 @@
 # Created: Thursday, December  1 2011
 #
 
-. $SCRIPTS_DIR/NETCDF4.env
-. $SCRIPTS_DIR/UDUNITS2.env
-. $SCRIPTS_DIR/MPICH.env
-. $SCRIPTS_DIR/NCO.env
+. $appsdir/NCO.env
+cd $WRF_BASE/src/${DIR}
 
-cd $WRF_BASE/src/
-cd ${DIR}
+for dep in ${DEP[@]}; do        # soruce dep envs
+    source $appsdir/$dep.env
+done
 
 export NETCDF4_ROOT
 export NETCDF_INC

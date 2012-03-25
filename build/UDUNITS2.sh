@@ -1,5 +1,6 @@
 #!/bin/bash
-. $SCRIPTS_DIR/UDUNITS2.env
+. $appsdir/UDUNITS2.env
+
 cd $WRF_BASE/src/
 cd ${DIR}
 ./configure \

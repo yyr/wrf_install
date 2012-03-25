@@ -3,12 +3,12 @@
 #    File: NCVIEW.sh
 # Created: Thursday, December  1 2011
 
-. $SCRIPTS_DIR/HDF5.env
-. $SCRIPTS_DIR/NETCDF4.env
-. $SCRIPTS_DIR/UDUNITS2.env
-. $SCRIPTS_DIR/NCVIEW.env
-cd $WRF_BASE/src/
-cd ${DIR}
+. $appsdir/NCVIEW.env
+cd $WRF_BASE/src/${DIR}
+
+for dep in ${DEP[@]}; do        # soruce dep envs
+    source $appsdir/$dep.env
+done
 
 ./configure \
     --prefix=$NCVIEW_ROOT \

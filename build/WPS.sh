@@ -1,13 +1,5 @@
 ##!/bin/bash
-. $SCRIPTS_DIR/WRF.env
-. $SCRIPTS_DIR/WPS.env
-
-export NETCDF=${NETCDF4_ROOT}
-export WRFIO_NCD_LARGE_FILE_SUPPORT=1
-export WRF_EM_CORE=1
-export WRF_DA_CORE=0
-export JASPERLIB=${JASPER_ROOT}/lib
-export JASPERINC=${JASPER_ROOT}/include
+. $appsdir/WPS.env             # find out dependencies
 
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
@@ -15,8 +7,22 @@ if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     tar zxf ${APP}.${EXT}
     mv ${DIR} $WPS_ROOT
 fi
-
 cd $WPS_ROOT
+
+. $SCRIPTS_DIR/WRF.env
+. $SCRIPTS_DIR/WPS.env
+
+
+for dep in ${DEP[@]}; do        # soruce dep envs
+    source $appsdir/$dep.env
+done
+
+export NETCDF=${NETCDF4_ROOT}
+export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+export WRF_EM_CORE=1
+export WRF_DA_CORE=0
+export JASPERLIB=${JASPER_ROOT}/lib
+export JASPERINC=${JASPER_ROOT}/include
 
 ./clean -a # clean first
 ./configure  < $SCRIPTS_DIR/build/configure.wps.${COMP}.select

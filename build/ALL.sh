@@ -1,12 +1,16 @@
+# the following are independents
 ./ZLIB.sh
 ./SZIP.sh
 ./JPEG.sh
 ./JASPER.sh
-./HDF5.sh
 ./UDUNITS2.sh
+./MPICH.sh
+
+
+# the following are dependents on other packages
+./HDF5.sh
 ./NETCDF4.sh
 ./NCVIEW.sh
-./MPICH.sh
 
 #./NCARG.sh # note installs binary for GCC only
 

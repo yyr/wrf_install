@@ -1,19 +1,5 @@
 ##!/bin/bash
-. $SCRIPTS_DIR/JASPER.env
-. $SCRIPTS_DIR/ZLIB.env
-. $SCRIPTS_DIR/SZIP.env
-. $SCRIPTS_DIR/HDF5.env
-. $SCRIPTS_DIR/NETCDF4.env
-. $SCRIPTS_DIR/MPICH.env
-. $SCRIPTS_DIR/WRF.env
-
-export NETCDF=${NETCDF4_ROOT}
-export WRFIO_NCD_LARGE_FILE_SUPPORT=1
-export WRF_EM_CORE=1
-export WRF_DA_CORE=0
-export JASPERLIB=${JASPER_ROOT}/lib
-export JASPERINC=${JASPER_ROOT}/include
-
+. $appsdir/WRF.env             # find out dependencies
 
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
@@ -23,6 +9,17 @@ if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
 fi
 
 cd $WRF_ROOT
+
+for dep in ${DEP[@]}; do        # soruce dep envs
+    source $appsdir/$dep.env
+done
+
+export NETCDF=${NETCDF4_ROOT}
+export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+export WRF_EM_CORE=1
+export WRF_DA_CORE=0
+export JASPERLIB=${JASPER_ROOT}/lib
+export JASPERINC=${JASPER_ROOT}/include
 
 ./clean -a         # clean first
 ./configure  < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select

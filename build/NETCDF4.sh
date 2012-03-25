@@ -1,13 +1,12 @@
 #!/bin/bash
-. $SCRIPTS_DIR/ZLIB.env
-. $SCRIPTS_DIR/SZIP.env
-. $SCRIPTS_DIR/HDF5.env
-. $SCRIPTS_DIR/UDUNITS2.env
-. $SCRIPTS_DIR/NETCDF4.env
-cd $WRF_BASE/src/
-cd ${DIR}
-
+source $appsdir/NETCDF4.env
+cd $WRF_BASE/src/${DIR}
 echo $(pwd)
+
+for dep in ${DEP[@]}; do # soruce dep envs
+    source $appsdir/$dep.env
+done
+. $appsdir/NETCDF4.env
 
 ./configure \
     --prefix=$NETCDF4_ROOT \
