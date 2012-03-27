@@ -1,141 +1,136 @@
-[this file is written in Emacs orgmode markeup]
+[NOTE: This file is written in Emacs [[http://orgmode.org][orgmode]] markeup. If you are not
+familiar with it and trouble reading this please see
+https://github.com/yyr/wrf_install/#readme page.]
 
 wrf_install is collection of shell scripts to automate the processing
 of downloading and building wrf model and its dependencies on veriety of
 machines with different compilers.
 
-Website: https://github.com/yyr/wrf_install
+website: https://github.com/yyr/wrf_install
 
 * Introduction
-Building wrf model is tedious. wrf_install is collection of shell scripts to
-automate the downloading and building process. these scripts are very
-much workable state. This is first written by Rick Morgans.
+Building WRF model is tedious. wrf_install is a collection of shell
+scripts(to be precise bash shell) to automate the downloading and
+building process. wrf_install is first started by Rick Morgans so thanks Rick.
 
-* How to Use?
-** quick read
+* How to use?
+** Quick read
 start with sourcing the SOURCEME file. By default building process
-will be in ~ ~/wrf ~ directory. Edit this if you want to change
-the location of the building. set the compiler option aswell.
-and source the file.
+takes place in "~/wrf" directory. Edit that file if you want to change
+the location of the installation(WRF_BASE variable). Set the compiler
+Option as well and source that file.
 
-: source SOURCEME
+: source SOURCEME               # it also spits some useful information, read it
+: ./download_app.sh all
 
-once this is done.  download and extract all the packages we need by
-calling the script ~download_app.sh~
+So now all the needed apps are downloaded and extracted. Check
+"~/wrf/src" folder.
 
-: ./download_app.sh ALL
-
-the packages are downloaded and extracted in ~/wrf/src directory.
-
-and go to the build directory. start building the each by calling
+And go to the ~build~ directory. Start building the each by calling
 individual ~.sh~ file or to install all at once call ~ALL.sh~
 
 : cd build
 : ./ALL.sh
 
-** little walk through
-To test how it works..
+** Little walk through
+To test how it works.. lets try to install one component.
 
-try to install one component.. Follow these steps.
+Open the ~SOURCEME~ file with your editor.
 
-open the SOURCEME file with your editor
-you may want to customize these options;
-- Directory where installation should take place. (WRF_BASE variable)
+Customize:
+- WRF_BASE variable. i.e., Directory in which downloads/installation should take
+  place. By default it is "~/wrf".
+- Which compilers you want to use. Again by default it is gnu gcc.  if
+  you have intel instead of Gnu gcc compilers. change them accordingly
+  (There are comments in that file,it must be easy).
 
-By default "~/wrf" is the folder all the downloads and installation
-takes place.
+Okay now lets go to the action part. Lets download and build ~zlib~.
 
-- which compilers you want to use.
-
-By default it is GNU gcc.  If you have intel instead of GNU gcc
-compilers. change them accordingly (there is an example how to set,
-it must be easy).
-
-OKAY now lets try to install ~zlib~ first
-
-#+BEGIN_SRC sh
+#+begin_src sh
 source SOURCEME # this is where you start
 ./download_app.sh ZLIB # download zlib and decompress it
 cd build # goto the directory where build scripts are located
 ./ZLIB.sh
-#+END_SRC
+#+end_src
 
-that's it..
-If everything goes well you have just built and installed ~zlib~. see
-in the $WRF_BASE/$compiler directory.
+That's it.. If everything goes well you have just downloaded and built
+& installed ~zlib~. See in the $WRF_BASE/$compiler directory.
 
 I strongly *suggest* you to install the components one by one for the first
 time around. So its easy for you to see what is going on and
-understand how these script work.
+understand how wrf_install work.
 
-these are the components you can install.(each one has its ?.sh file
-in the build directory)
+The following list of components you can install right now.(each one
+has its ~APP.sh~ file in the ~build~ directory)
 
-- ZLIB
-- SZIP
-- JPEG
-- JASPER
-- HDF5
-- UDUNITS2
-- NETCDF4
-- NCVIEW
-- MPICH
-- WRF
-- WPS
+- zlib
+- szip
+- jpeg
+- jasper
+- hdf5
+- udunits2
+- netcdf4
+- ncview
+- mpich
+- wrf
+- wps
 
 * How it works?
 wrf_install is meant to bring consistency in setting up environment
 variables. When ~SOURCEME~ file is sourced, it will set WRF_BASE
-variable and compiler options. (see the ~compiler~ directory to modify
-the compiler options)
+variable and compiler options. The sourcing also gives you feedback
+how to change these compiler options.
 
-Each app has env file which contains few properties(eg., /URL/ from
-where that app can be downloaded) of that APP. FOR eg., zlib app has a
-file called ~ZLIB.env~.
+Each app has env file which contains few properties(eg., /url/ from
+where that app can be downloaded) of that app. for eg., zlib app has a
+file called ~ZLIB.env~ in the ~apps~ directory.
 
 In the same way each app has a file named ~APP.sh~ in build directory
-which takes care of installation process while learning about its
-properties from env file and its dependencies env files. Luckily all
-dependency apps are built by GNU utilities autoconf, configure and make. So
-almost no manual interventions are needed.
+which takes care of installation process while learning about its'
+properties from env file and its dependencies' env files. luckily all
+apps of WRF depend upon are built by GNU utilities autoconf, configure #
+and make. So almost no manual interventions are needed.
 
-Finally building WRF/WPS app is tricky because these won't use make
-directly. So some compiler options and path need to change.
+Finally building WRF/WPS is tricky because these won't use make
+directly. So some compiler options and path need to change and may
+need to change ~configure.wrf~ file depend on the machine you are
+working on. For this also we have oneline perl scripts. For example
+see the gcc folder there is ~fix.configure.wrf~ file.
 
 * How to customize then?
 ** Compiler options
-As it is said in previous section when you source the ~SOURCEME~ file
-it invokes ~compiler.env~ to get compiler setting.  For gcc you need
-to customize ~$SCRIPTS_DIR/gcc/compiler.env~ file.
+As it is said in the previous section when you source the ~SOURCEME~ file
+it invokes ~compiler.env~ to get compiler setting.  for gcc you need
+to customize ~$scripts_dir/gcc/compiler.env~ file.
 
-** configure options
-build directory contains individual build scripts. Customize them
+** Configure options
+Build directory contains individual build scripts. customize them
 accordingly.
 
-** WRF & WPS
-selection different options in the (wrf/wps) configure script is
-automated feeding configure.wrf.gcc.select in the stdin. So customize
-them to your need. By default serial built is configured.  Also read
-the comments in the ~WRF.sh~ and ~WPS.sh~ files
+** wrf & wps
+Selection of different build options for wrf/wps configure script is
+automated by feeding configure.wrf.gcc.select to the stdin. so
+customize them to your need, they also live in the ~build~
+directory. by default serial built is configured.  also read the
+comments in the ~WRF.sh~ and ~WPS.sh~ files
 
 * Compilers supported by wrf_install
-for now gcc and intel.
+For now gcc and intel. xl and pgf will be supported in the later
+versions of wrf_install.
 
-These compilers are available for me at school. So I could test them.
-
-| compiler | system  | state   | remarks                |
+| Compiler | system  | state   | remarks                |
 |----------+---------+---------+------------------------|
 | gcc      | linux   | works   | may need minor changes |
 | intel    | linux   | works   | may need minor changes |
-| XL       | ibm aix | not yet | need to implement      |
+| pgf      | linux   | not yet | need to implement      |
+| xl       | Ibm aix | not yet | need to implement      |
 
 * FAQ
 check ~faq.org~ file in ~doc~ folder
 
 * Contributing
 Any patches/reports/suggestions are most welcome. Drop [[mailto:yagensh◎live.com][me]] a mail (replace
-Unicode character) or report on github repository.
-https://github.com/yyr/wrf_install/issues
+unicode character) or preferably report on github [[https://github.com/yyr/wrf_install/issues][issues]] page.
 
 * TODOs
 Check dev.org file
