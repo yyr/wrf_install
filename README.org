@@ -109,13 +109,13 @@ accordingly.
 
 ** wrf & wps
 Selection of different build options for wrf/wps configure script is
-automated by feeding configure.wrf.gcc.select to the stdin. so
+automated by feeding ~configure.wrf.gcc.select~ to the stdin. so
 customize them to your need, they also live in the ~build~
-directory. by default serial built is configured.  also read the
-comments in the ~WRF.sh~ and ~WPS.sh~ files
+directory. by default serial built is configured.  Also reading the
+comments in the ~WRF.sh~ and ~WPS.sh~ can be helpful.
 
 * Compilers supported by wrf_install
-For now gcc and intel. xl and pgf will be supported in the later
+For now /gcc/ and /intel/. /xl/ and /pgf/ will be supported in the later
 versions of wrf_install.
 
 | Compiler | system  | state   | remarks                |
@@ -126,7 +126,7 @@ versions of wrf_install.
 | xl       | Ibm aix | not yet | need to implement      |
 
 * FAQ
-check ~faq.org~ file in ~doc~ folder
+Check ~faq.org~ file in ~doc~ folder
 
 * Contributing
 Any patches/reports/suggestions are most welcome. Drop [[mailto:yagensh◎live.com][me]] a mail (replace
