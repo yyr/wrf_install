@@ -8,12 +8,12 @@ if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     mv ${DIR} $WPS_ROOT
 fi
 cd $WPS_ROOT
-. $appsdir/WPS.env              # retain app name and other details
-
 
 for dep in ${DEP[@]}; do        # soruce dep envs
     source $appsdir/$dep.env
 done
+
+. $appsdir/WPS.env              # retain app name and other details
 
 export NETCDF=${NETCDF4_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
