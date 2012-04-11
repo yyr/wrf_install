@@ -22,15 +22,20 @@ export JASPERLIB=${JASPER_ROOT}/lib
 export JASPERINC=${JASPER_ROOT}/include
 
 ./clean -a         # clean first
-./configure  < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select
+# ----------- run configure ---------------------------
+## *IMPORTANT*: To automate the configuring, put number in
+## "configure.wrf.${COMP}.select" your preffered selection
+./configure
+#./configure  < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select
 
+# ----------- tweak generated "configure.wrf" file -----------------
 ## common problems of configure.wrf should be fixed in the following script
 $SCRIPTS_DIR/build/fix.configure.wrf.sh
 
-### machine specific tweaks
+# ----------- tweak generated "configure.wrf" file (compiler specific)------------
 # for eg if you want to change configure.wrf file put some code in your
 # check fix.configure.wrf.intel.sh
 $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
 
-# # read dummy                            # manual inspection
+#read dummy                            # manual inspection
 ./compile em_real  2>&1 | tee log.${COMP}.compile

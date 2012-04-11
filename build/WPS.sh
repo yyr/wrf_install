@@ -23,12 +23,18 @@ export JASPERLIB=${JASPER_ROOT}/lib
 export JASPERINC=${JASPER_ROOT}/include
 
 ./clean -a # clean first
-./configure  < $SCRIPTS_DIR/build/configure.wps.${COMP}.select
 
+# ----------- run configure ---------------------------
+## *IMPORTANT*: To automate the configuring, put
+## "configure.wps.${COMP}.select" your preffered selection
+./configure
+#./configure  < $SCRIPTS_DIR/build/configure.wps.${COMP}.select
+
+# ----------- tweak generated "configure.wps" file -----------------
 ## common problems of configure.wps should be fixed in the following script
 $SCRIPTS_DIR/build/fix.configure.wps.sh
 
-### machine specific tweaks
+# ----------- tweak generated "configure.wps" file (compiler specific)------------
 # for eg if you want to change configure.wps file put some code in your
 # check fix.configure.wrf.intel.sh
 $SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh
