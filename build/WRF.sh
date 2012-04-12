@@ -1,6 +1,12 @@
 ##!/bin/bash
-. $appsdir/WRF.env             # find out dependencies
 
+################### *IMPORTANT* ######################
+# for em core
+export WRF_EM_CORE=1
+# export WRF_NMM_CORE=1 #  you want to build nmm core uncomment this line
+######################################################
+
+. $appsdir/WRF.env             # find out dependencies
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     cd $WRF_BASE/src
@@ -14,9 +20,9 @@ for dep in ${DEP[@]}; do        # soruce dep envs
 done
 . $appsdir/WRF.env              # retain app name and other details
 
+
 export NETCDF=${NETCDF4_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
-export WRF_EM_CORE=1
 export WRF_DA_CORE=0
 export JASPERLIB=${JASPER_ROOT}/lib
 export JASPERINC=${JASPER_ROOT}/include

@@ -1,4 +1,11 @@
 ##!/bin/bash
+
+################### *IMPORTANT* ######################
+# for em core
+export WRF_EM_CORE=1
+# export WRF_NMM_CORE=1 #  you want to build nmm core uncomment this line
+######################################################
+
 . $appsdir/WPS.env             # find out dependencies
 
 # check folder is already present
@@ -17,7 +24,6 @@ done
 
 export NETCDF=${NETCDF4_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
-export WRF_EM_CORE=1
 export WRF_DA_CORE=0
 export JASPERLIB=${JASPER_ROOT}/lib
 export JASPERINC=${JASPER_ROOT}/include
