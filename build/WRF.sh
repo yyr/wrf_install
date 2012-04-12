@@ -1,9 +1,8 @@
 ##!/bin/bash
 
 ################### *IMPORTANT* ######################
-# for em core
-export WRF_EM_CORE=1
-# export WRF_NMM_CORE=1 #  you want to build nmm core uncomment this line
+export WRF_EM_CORE=1 # for em core
+# export WRF_NMM_CORE=1 #  for nmm core
 ######################################################
 
 . $appsdir/WRF.env             # find out dependencies
