@@ -15,6 +15,7 @@ echo $(pwd)
     --enable-fortran \
     --with-zlib=$ZLIB_ROOT \
     --with-szlib=$SZIP_ROOT \
+    --with-jpeg=$JPEG_ROOT \
     --with-pic | tee ${APP}.${COMP}.config
 
 make clean 2>&1 | tee ${APP}.${COMP}.clean
