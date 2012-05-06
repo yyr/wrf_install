@@ -7,11 +7,15 @@ GREEN='\E[32m'
 
 function usage()
 {
-    echo
-    echo "      USAGE: $0 <all|appname>"
-    echo
-    echo "where \"appname\" is one of the follwoing"
-    echo "========================================="
+    cat <<EOF
+USAGE:
+       $0 -options <all|appname>
+Options:
+          -e extract only (do not download)
+
+"where \"appname\" is one of the follwoing"
+"========================================="
+EOF
     for app in ${apps[@]}; do
         echo $app
     done
@@ -50,6 +54,10 @@ function extract_package()
             ;;
         *"zip" )
             unzip $appsrc &> $logdir/$extractlog &&
+            echo "extraction is done and log is written to \"$logdir/$extractlog\""
+            ;;
+        *"tar" )
+            tar xvf $appsrc &> $logdir/$extractlog &&
             echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         * )
@@ -97,44 +105,53 @@ unset app
 counter=0
 while [ $counter -le $# ]; do
     case $1 in
-        all|ALL)
-            for app in ${apps[@]};
-            do
-                unset URL
-                . $appsdir/${app}.env  &>/dev/null
-                if [ ! -z $URL ]; then
-                    download_package $URL
-                fi
-                [ $? == 0 ] && extract_package $package
-            done
-            ;;
+        -e)
 
-        -e )
             shift
-            for app in ${apps[@]};
-            do
-                unset URL
-                . $appsdir/${app}.env  &>/dev/null
-                extract_package $package
-            done
             ;;
 
-        *)
-            unset URL
-            package="${1%.[^.]*}" # strip out ".env" if available
-            . $appsdir/${package}.env  &>/dev/null
-            if [ ! -z $URL ]; then
-                download_package $URL
-            else
-                echo -e "$RED unknown app \"$package\" $RESET"
-                usage $0
-                exit 64
-            fi
-            [ $? == 0 ] && extract_package $package
+        * )
+            case $1 in
+                all|ALL)
+                    for app in ${apps[@]};
+                    do
+                        unset URL
+                        . $appsdir/${app}.env  &>/dev/null
+                        if [ ! -z $URL ]; then
+                            download_package $URL
+                        fi
+                        [ $? == 0 ] && extract_package $package
+                    done
+                    ;;
+
+                -e )
+                    shift
+                    for app in ${apps[@]};
+                    do
+                        unset URL
+                        . $appsdir/${app}.env  &>/dev/null
+                        extract_package $package
+                    done
+                    ;;
+
+                *)
+                    unset URL
+                    package="${1%.[^.]*}" # strip out ".env" if available
+                    . $appsdir/${package}.env  &>/dev/null
+                    if [ ! -z $URL ]; then
+                        download_package $URL
+                    else
+                        echo -e "$RED unknown app \"$package\" $RESET"
+                        usage $0
+                        exit 64
+                    fi
+                    [ $? == 0 ] && extract_package $package
+                    ;;
+
+            esac
+            shift
             ;;
     esac
-
-    shift
     let counter=counter+1
 done
 exit 0
