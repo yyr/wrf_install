@@ -30,10 +30,24 @@ export JASPERINC=${JASPER_ROOT}/include
 ./clean -a # clean first
 
 # ----------- run configure ---------------------------
-## *IMPORTANT*: To automate the configuring, put
-## "configure.wps.${COMP}.select" your preffered selection
-./configure
-#./configure  < $SCRIPTS_DIR/build/configure.wps.${COMP}.select
+# check configure selection file is available
+if [ -f "$SCRIPTS_DIR/${machine}/configure.wps.${COMP}.select" ]; then
+    # selection is available
+    ./configure  < $SCRIPTS_DIR/${machine}/configure.wps.${COMP}.select
+
+    else
+
+    echo "
+**IMPORTANT**
+you can automate the selection of configuration option by editing/creating
+\"$SCRIPTS_DIR/${machine}/configure.wps.${COMP}.select\"
+    press ENTER to continue to configure
+"
+    read dummy
+    ./configure
+
+fi
+
 
 # ----------- tweak generated "configure.wps" file -----------------
 ## common problems of configure.wps should be fixed in the following script
@@ -41,7 +55,7 @@ $SCRIPTS_DIR/build/fix.configure.wps.sh
 
 # ----------- tweak generated "configure.wps" file (compiler specific)------------
 # for eg if you want to change configure.wps file put some code in your
-# check fix.configure.wrf.intel.sh
+# check fix.configure.wps.intel.sh
 $SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh
 
 

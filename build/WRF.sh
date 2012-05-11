@@ -27,11 +27,25 @@ export JASPERLIB=${JASPER_ROOT}/lib
 export JASPERINC=${JASPER_ROOT}/include
 
 ./clean -a         # clean first
+
 # ----------- run configure ---------------------------
-## *IMPORTANT*: To automate the configuring, put number in
-## "configure.wrf.${COMP}.select" your preffered selection
-./configure
-#./configure  < $SCRIPTS_DIR/build/configure.wrf.${COMP}.select
+# check configure selection file is available
+if [ -f "$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select" ]; then
+    # selection is available
+    ./configure  < $SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select
+
+    else
+
+    echo "
+**IMPORTANT**
+you can automate the selection of configuration option by editing/creating
+\"$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select\"
+    press ENTER to continue to configure
+"
+    read dummy
+    ./configure
+
+fi
 
 # ----------- tweak generated "configure.wrf" file -----------------
 ## common problems of configure.wrf should be fixed in the following script
