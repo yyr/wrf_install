@@ -1,12 +1,8 @@
-[NOTE: This file is written in Emacs [[http://orgmode.org][orgmode]] markeup. If you are not
-familiar with it and trouble reading this please see
-https://github.com/yyr/wrf_install/#readme page.]
+[NOTE: This file is written in Emacs org-mode markup. If you are not
+familiar with it and trouble reading this document, please goto
+https://github.com/yyr/wrf_install/#readme to find html version.]
 
-wrf_install is collection of shell scripts to automate the processing
-of downloading and building wrf model and its dependencies on veriety of
-machines with different compilers.
-
-website: https://github.com/yyr/wrf_install
+WEBSITE: https://github.com/yyr/wrf_install
 
 * Introduction
 Building WRF model is tedious. wrf_install is a collection of shell
