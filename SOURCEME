@@ -14,6 +14,7 @@ compiler=gcc
 # | sgi     | sgi altix           |
 # | ubuntu  | 64 bit ubuntu       |
 # | sr16000 | hitachi AIX machine |
+# | linux   | some linux          |
 export machine=ubuntu
 
 
