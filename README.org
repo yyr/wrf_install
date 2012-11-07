@@ -16,8 +16,10 @@ takes place in "~/wrf" directory. Edit that file if you want to change
 the location of the installation(WRF_BASE variable). Set the compiler
 Option as well and source that file.
 
-: source SOURCEME               # it also spits some useful information, read it
-: ./download_app.sh all
+#+BEGIN_SRC sh
+source SOURCEME               # it also spits some useful information, read it
+./download_app.sh all
+#+END_SRC
 
 So now all the needed apps are downloaded and extracted. Check
 "~/wrf/src" folder.
@@ -25,8 +27,11 @@ So now all the needed apps are downloaded and extracted. Check
 And go to the ~build~ directory. Start building the each by calling
 individual ~.sh~ file or to install all at once call ~ALL.sh~
 
-: cd build
-: ./ALL.sh
+#+BEGIN_SRC sh
+cd build
+./ALL.sh
+#+END_SRC
+
 
 ** Little walk through
 To test how it works.. lets try to install one component.
@@ -36,18 +41,18 @@ Open the ~SOURCEME~ file with your editor.
 Customize:
 - WRF_BASE variable. i.e., Directory in which downloads/installation should take
   place. By default it is "~/wrf".
-- Which compilers you want to use. Again by default it is gnu gcc.  if
-  you have intel instead of Gnu gcc compilers. change them accordingly
-  (There are comments in that file,it must be easy).
+- Which compilers you want to use. Again by default it is GNU gcc.  if you
+  have intel instead of gcc compilers. change them accordingly (There are
+  comments in that file,it must be easy).
 
 Okay now lets go to the action part. Lets download and build ~zlib~.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 source SOURCEME # this is where you start
 ./download_app.sh ZLIB # download zlib and decompress it
 cd build # goto the directory where build scripts are located
 ./ZLIB.sh
-#+end_src
+#+END_SRC
 
 That's it.. If everything goes well you have just downloaded and built
 & installed ~zlib~. See in the $WRF_BASE/$compiler directory.
