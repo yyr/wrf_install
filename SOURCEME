@@ -62,7 +62,7 @@ Compiler flags are set. If like to change any of following values,
 please visit these files.
 
     \"$SCRIPTS_DIR/${compiler}/compiler.env\"
-    \"$SCRIPTS_DIR/${machine}/${COMP}.env\"   (if available..)
+    \"$SCRIPTS_DIR/${machine}/${COMP}.env\"   (change if available/create if necessary)
 
 and source this file again.
 "
