@@ -1,21 +1,30 @@
-# the following are independents
-./ZLIB.sh
-./SZIP.sh
-./JPEG.sh
-./JASPER.sh
-./UDUNITS2.sh
-./MPICH.sh
+# change list.
+apps=(ZLIB
+    SZIP
+    JPEG
+    JASPER
+    UDUNITS2
+    MPICH
+    HDF5
+    NETCDF4
+    NCVIEW
+    WRF
+    WPS)
 
+#
+function build_app()
+{
+    echo "Building \"$1\" "
+    ${SCRIPTS_DIR}/build/${1}.sh
+    if [ $? -ne 0 ]; then
+        echo Failed building ${1}.
+        exit
+    fi
+}
 
-# the following are dependents on other packages
-./HDF5.sh
-./NETCDF4.sh
-./NCVIEW.sh
-
-#./NCARG.sh # note installs binary for GCC only
-
-./WRF.sh
-./WPS.sh
+for app in ${apps[@]}; do
+    build_app ${app}
+done
 
 # find . -iname '*.exe' -type f | parallel cp {} {}.$COMP
 # find . -iname '*.exe.'${COMP} -type f | parallel -m  cp {} ~/bin/
