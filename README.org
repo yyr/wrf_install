@@ -24,12 +24,12 @@ source SOURCEME               # it also spits some useful information, read it
 So now all the needed apps are downloaded and extracted. Check
 "~/wrf/src" folder.
 
-And go to the ~build~ directory. Start building the each by calling
-individual ~.sh~ file or to install all at once call ~ALL.sh~
+And go to the ~build~ directory. Start building by running ~build_app.sh~
+script.
 
 #+BEGIN_SRC sh
 cd build
-./ALL.sh
+./build_app.sh # read what it says.
 #+END_SRC
 
 
@@ -51,7 +51,7 @@ Okay now lets go to the action part. Lets download and build ~zlib~.
 source SOURCEME # this is where you start
 ./download_app.sh ZLIB # download zlib and decompress it
 cd build # goto the directory where build scripts are located
-./ZLIB.sh
+./build_app.sh ZLIB
 #+END_SRC
 
 That's it.. If everything goes well you have just downloaded and built
