@@ -1,15 +1,15 @@
 # change list.
 app_list=(ZLIB
-        SZIP
-        JPEG
-        JASPER
-        UDUNITS2
-        MPICH
-        HDF5
-        NETCDF4
-        NCVIEW
-        WRF
-        WPS)
+    SZIP
+    JPEG
+    JASPER
+    UDUNITS2
+    MPICH
+    HDF5
+    NETCDF4
+    NCVIEW
+    WRF
+    WPS)
 
 #
 function usage()
@@ -18,19 +18,29 @@ function usage()
 USAGE:
        $0 -options <all|appname>
 
-"where \"appname\" is one of the follwoing"
-"========================================="
+Where 'appname' is one of the following.
+---------------------------------------
 EOF
     for app in ${app_list[@]}; do
         echo $app
     done
+    cat <<EOF
+---------------------------------------
+
+IMPORTANT:
+The order of building apps may be altered in your case since this
+package doesn't resolve dependencies (yet). So change this app_list variable
+for you need.
+
+EOF
     exit 4
+
 }
 
 function build_app()
 {
     echo "Building \"$1\" "
-    echo ${SCRIPTS_DIR}/build/${1}.sh
+    ${SCRIPTS_DIR}/build/${1}.sh
     if [ $? -ne 0 ]; then
         echo Failed building ${1}.
         exit
@@ -55,7 +65,7 @@ while [ $counter -lt $# ]; do
 
         *)
             app="${1%.[^.]*}" # strip out ".sh" if available
-                build_app $(echo $1 | tr '[:lower:]' '[:upper:]')
+            build_app $(echo $1 | tr '[:lower:]' '[:upper:]')
             ;;
 
     esac
