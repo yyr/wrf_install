@@ -13,8 +13,8 @@ USAGE:
 Options:
           -e extract only (do not download)
 
-"where \"appname\" is one of the follwoing"
-"========================================="
+where 'appname' is one of the following
+=========================================
 EOF
     for app in ${apps[@]}; do
         echo $app
