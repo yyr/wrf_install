@@ -28,9 +28,15 @@ EOF
 ---------------------------------------
 
 IMPORTANT:
-The order of building apps may be altered in your case since this
-package doesn't resolve dependencies (yet). So change this app_list variable
-for you need.
+   The order of building apps may need be altered in your case since
+   this package doesn't resolve dependencies (yet). So change app_list
+   variable in this file to control order of building or call the above
+   options one by one manually.
+
+NOTE:
+   This script is just a wrapper for indivial builing scripts which are
+   located in "build" directory. So how please read them and change them
+   freely according to your needs.
 
 EOF
     exit 4
