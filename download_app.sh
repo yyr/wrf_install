@@ -103,7 +103,8 @@ fi
 unset app
 #
 counter=0
-while [ $counter -le $# ]; do
+nofargs=$#
+while [ $counter -le $nofargs ]; do
     case $1 in
         -e)
 

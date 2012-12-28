@@ -45,7 +45,7 @@ EOF
 
 function build_app()
 {
-    echo "Building \"$1\" "
+    echo "Building \"$1\" .... "
     ${SCRIPTS_DIR}/build/${1}.sh
     if [ $? -ne 0 ]; then
         echo Failed building ${1}.
@@ -60,7 +60,8 @@ then
 fi
 
 counter=0
-while [ $counter -lt $# ]; do
+nofargs=$#
+while [ $counter -lt $nofargs ]; do
     case $1 in
         all|ALL)
             for app in ${app_list[@]};
@@ -75,6 +76,7 @@ while [ $counter -lt $# ]; do
             ;;
 
     esac
+    shift
     let counter=counter+1
 done
 
