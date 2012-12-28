@@ -46,7 +46,18 @@ EOF
 function build_app()
 {
     echo "Building \"$1\" .... "
-    ${SCRIPTS_DIR}/build/${1}.sh
+    . $appsdir/${1}.env
+    cd $WRF_BASE/src/${DIR}
+
+    for dep in ${DEP[@]}; do        # soruce dep envs
+        source $appsdir/$dep.env
+    done
+    . $appsdir/${1}.env
+
+    echo $(pwd)
+
+    . ${SCRIPTS_DIR}/build/${1}.sh
+
     if [ $? -ne 0 ]; then
         echo Failed building ${1}.
         exit
@@ -79,10 +90,3 @@ while [ $counter -lt $nofargs ]; do
     shift
     let counter=counter+1
 done
-
-# for app in ${apps[@]}; do
-#     build_app ${app}
-# done
-
-# find . -iname '*.exe' -type f | parallel cp {} {}.$COMP
-# find . -iname '*.exe.'${COMP} -type f | parallel -m  cp {} ~/bin/

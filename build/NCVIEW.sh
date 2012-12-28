@@ -1,16 +1,3 @@
-#!/bin/bash
-#
-#    File: NCVIEW.sh
-# Created: Thursday, December  1 2011
-
-. $appsdir/NCVIEW.env
-cd $WRF_BASE/src/${DIR}
-
-for dep in ${DEP[@]}; do        # soruce dep envs
-    source $appsdir/$dep.env
-done
-. $appsdir/NCVIEW.env             # retain app name and other details
-
 ./configure \
     --prefix=$NCVIEW_ROOT \
     --enable-fortran \
@@ -25,5 +12,3 @@ make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
 make check 2>&1 | tee ${APP}.${COMP}.check
 make install 2>&1 | tee ${APP}.${COMP}.install
-
-# NCVIEW.sh ends here

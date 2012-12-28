@@ -1,11 +1,7 @@
-##!/bin/bash
-
 ################### *IMPORTANT* ######################
 export WRF_EM_CORE=1 # for em core
 # export WRF_NMM_CORE=1 #  for nmm core
 ######################################################
-
-. $appsdir/WPS.env             # find out dependencies
 
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
@@ -14,12 +10,6 @@ if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     mv ${DIR} $WPS_ROOT
 fi
 cd $WPS_ROOT
-
-for dep in ${DEP[@]}; do        # soruce dep envs
-    source $appsdir/$dep.env
-done
-
-. $appsdir/WPS.env              # retain app name and other details
 
 export NETCDF=${NETCDF4_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
@@ -47,7 +37,6 @@ you can automate the selection of configuration option by editing/creating
     ./configure
 
 fi
-
 
 # ----------- tweak generated "configure.wps" file -----------------
 ## common problems of configure.wps should be fixed in the following script

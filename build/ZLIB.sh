@@ -1,8 +1,3 @@
-#!/bin/bash
-. $appsdir/ZLIB.env
-cd $WRF_BASE/src/${DIR}
-
-echo $(pwd)
 ./configure --prefix=$ZLIB_ROOT | tee ${APP}.${COMP}.config
 rm CMakeCache.txt
 

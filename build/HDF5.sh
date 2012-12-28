@@ -1,14 +1,3 @@
-#!/bin/bash
-. $appsdir/HDF5.env             # find out dependencies
-cd $WRF_BASE/src/${DIR}
-
-for dep in ${DEP[@]}; do        # soruce dep envs
-    source $appsdir/$dep.env
-done
-. $appsdir/HDF5.env             # retain app name and other details
-
-echo $(pwd)
-
 ./configure \
     --prefix=$HDF5_ROOT \
     --exec-prefix=$HDF5_ROOT \

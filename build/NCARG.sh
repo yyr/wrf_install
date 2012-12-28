@@ -1,11 +1,3 @@
-##!/bin/bash
-. $appsdir/NCARG.env
-cd $WRF_BASE/src/${DIR}
-
-for dep in ${DEP[@]}; do        # soruce dep envs
-    source $appsdir/$dep.env
-done
-
 cd $NCARG_ROOT
 if [ $COMP == "gcc" ]
 then

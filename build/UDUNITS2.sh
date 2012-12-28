@@ -1,7 +1,3 @@
-#!/bin/bash
-. $appsdir/UDUNITS2.env
-cd $WRF_BASE/src/${DIR}
-
 ./configure \
     --prefix=$UDUNITS2_ROOT \
     --exec-prefix=$UDUNITS2_ROOT \
