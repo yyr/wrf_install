@@ -5,7 +5,7 @@ export WRF_BASE=~/wrf
 # | intel  | for intel compilers     |
 # | gcc    | gcc & gfortan compilers |
 # | xl     | for ibm aix machines    |
-# | pgf    | pgf compilers           |
+# | pgi    | pgi compilers           |
 compiler=gcc
 
 # -------------------
