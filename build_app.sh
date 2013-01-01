@@ -45,9 +45,15 @@ EOF
 
 function build_app()
 {
+    export LANG=C
     echo "Building \"$1\" .... "
     . $appsdir/${1}.env
-    cd $WRF_BASE/src/${DIR}
+
+    if [ -d $WRF_BASE/src/${DIR} ]; then
+        cd $WRF_BASE/src/${DIR}
+    else
+        echo "warning: no directory named $WRF_BASE/src/${DIR}"
+    fi
 
     for dep in ${DEP[@]}; do        # soruce dep envs
         source $appsdir/$dep.env
