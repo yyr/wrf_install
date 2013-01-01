@@ -1,26 +1,23 @@
 # directory where installation takes place
 export WRF_BASE=~/wrf
 
-# |--------+-------------------------|
 # | intel  | for intel compilers     |
 # | gcc    | gcc & gfortan compilers |
 # | xl     | for ibm aix machines    |
 # | pgi    | pgi compilers           |
 compiler=gcc
 
-# -------------------
-# SYSTEM specific
-# |---------+---------------------|
+# System Specific
 # | sgi     | sgi altix           |
 # | ubuntu  | 64 bit ubuntu       |
 # | sr16000 | hitachi AIX machine |
 # | linux   | some linux          |
-export machine=ubuntu
+export machine=sgi
 
+# -------------------
+export dep_root=deps                 # where to install common dependencies.
 
-########################################################################
-# ------NO NEED TO EDIT BELOW ----------------
-# simple check
+#------- NO NEED TO EDIT BELOW ----------
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
 export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 

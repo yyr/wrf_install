@@ -112,15 +112,16 @@ directory. by default serial built is configured.  Also reading the
 comments in the ~WRF.sh~ and ~WPS.sh~ can be helpful.
 
 * Compilers supported by wrf_install
-For now /gcc/ and /intel/. /xl/ and /pgf/ will be supported in the later
+For now /gcc/ and /intel/. /xl/ and /pgi/ will be supported in the later
 versions of wrf_install.
 
-| Compiler | system  | state   | remarks                |
-|----------+---------+---------+------------------------|
-| gcc      | linux   | works   | may need minor changes |
-| intel    | linux   | works   | may need minor changes |
-| pgf      | linux   | not yet | need to implement      |
-| xl       | Ibm aix | not yet | need to implement      |
+| Compiler | system  | state | remarks                |
+|----------+---------+-------+------------------------|
+| gcc      | linux   | ✔     | may need minor changes |
+| intel    | linux   | ✔     | may need minor changes |
+| pgi      | linux   | ✖     |                        |
+| xl       | Ibm aix | ✖     |                        |
+
 
 * FAQ
 Check ~faq.org~ file in ~doc~ folder
