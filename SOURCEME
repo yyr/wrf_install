@@ -12,7 +12,7 @@ compiler=gcc
 # | ubuntu  | 64 bit ubuntu       |
 # | sr16000 | hitachi AIX machine |
 # | linux   | some linux          |
-export machine=sgi
+export machine=ubuntu
 
 # -------------------
 export dep_root=deps                 # where to install common dependencies.
