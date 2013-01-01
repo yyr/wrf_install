@@ -1,7 +1,7 @@
-################### *IMPORTANT* ######################
-export WRF_EM_CORE=1 # for em core
-# export WRF_NMM_CORE=1 #  for nmm core
-######################################################
+#----------*IMPORTANT*--------------------------------------------------
+export WRF_EM_CORE=1        # for em core
+# export WRF_NMM_CORE=1     #  for nmm core
+#-----------------------------------------------------------------------
 
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
@@ -21,22 +21,16 @@ export JASPERINC=${JASPER_ROOT}/include
 ./clean -a         # clean first
 
 # ----------- run configure ---------------------------
-# check configure selection file is available
+# check configure selection file is available for automation.
 if [ -f "$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select" ]; then
-    # selection is available
     ./configure  < $SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select
-
-    else
-
-    echo "
-**IMPORTANT**
-you can automate the selection of configuration option by editing/creating
-\"$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select\"
-    press ENTER to continue to configure
-"
-    read dummy
+else
     ./configure
-
+    echo " **IMPORTANT**
+You can automate the selection of configuration option by editing/creating
+\"$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select\" press ENTER to
+continue to configure"
+    read dummy
 fi
 
 # ----------- tweak generated "configure.wrf" file -----------------
@@ -46,7 +40,6 @@ $SCRIPTS_DIR/build/fix.configure.wrf.sh
 # ----------- tweak generated "configure.wrf" file (compiler specific)------------
 # for eg if you want to change configure.wrf file put some code in your
 # check fix.configure.wrf.intel.sh
-$SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
+[ -f $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh ] && $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
 
-#read dummy                            # manual inspection
 ./compile em_real  2>&1 | tee log.${COMP}.compile
