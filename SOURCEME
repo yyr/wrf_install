@@ -14,8 +14,10 @@ compiler=gcc
 # | linux   | some linux          |
 export machine=ubuntu
 
-# -------------------
-export dep_root=deps                 # where to install common dependencies.
+# following setting is useful when you want to build WRF with different
+# compilers but not its the dependencies. if you dont understand what it is
+# right now, leave it "as it is"(tm)
+export dep_root=$compiler                 # where to install common dependencies.
 
 #------- NO NEED TO EDIT BELOW ----------
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
@@ -36,6 +38,7 @@ echo compiler=$compiler
 echo machine=$machine
 echo WRF_BASE=$WRF_BASE
 echo SCRIPTS_DIR=$SCRIPTS_DIR
+echo "dep_root=$dep_root  # where dependencies will be installed"
 echo '================================================================='
 echo
 
