@@ -39,14 +39,15 @@ function download_package()
 
 function extract_package()
 {
-    pack=$1
     appsrc=${APP}.${EXT}
     extractlog=${APP}.${EXT}.extraction.log
     logdir=$BASE/src/log
+
     if [ -d ${DIR} ]; then
         rm -r ${DIR}        # remove previouly extracted things
     fi
     mkdir -p $logdir
+
     case ${EXT} in
         *"gz"|*"tgz" )
             tar xzvf $appsrc &> $logdir/$extractlog &&
@@ -71,7 +72,7 @@ function download_extract()
     # download_extract <appname>
     unset URL
     . $appsdir/${app}.env  &>/dev/null
-    cd $WRF_BASE/src
+    cd $BASE/src
 
     if [ ! -z $URL ]; then
         download_package $URL
@@ -80,12 +81,13 @@ function download_extract()
         usage $0
         exit 64
     fi
-    [ $? == 0 ] && extract_package $package
+    [ $? == 0 ] && extract_package
     cd -
 }
 
 # ------------------------------------------------------
 export BASE=${BASE:-$WRF_BASE}
+echo $BASE
 
 # check needed environment variables are present or not
 env_error=24
@@ -132,6 +134,7 @@ while [ $counter -lt $nofargs ]; do
 
         *)
             app="${1%.[^.]*}" # strip out ".env" if available
+            app=$(echo $app | tr '[:lower:]' '[:upper:]')
             download_extract ${app}
             ;;
 
