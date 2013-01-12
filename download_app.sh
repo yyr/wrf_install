@@ -25,7 +25,8 @@ EOF
 function download_package()
 {
     echo "Downloading.... $APP"
-    wget -c $@ -P $BASE/src
+    echo wget -c $@ -P $BASE/src -O ${APP}.${EXT}
+    wget -c $@ -P $BASE/src -O ${APP}.${EXT}
     if [ $? -ne 0 ]; then
         echo -e "$RED FAILED TO DOWNLOAD.. $APP ;($RESET"
         return 64
@@ -42,7 +43,6 @@ function extract_package()
     appsrc=${APP}.${EXT}
     extractlog=${APP}.${EXT}.extraction.log
     logdir=$BASE/src/log
-    cd $BASE/src
     if [ -d ${DIR} ]; then
         rm -r ${DIR}        # remove previouly extracted things
     fi
@@ -71,14 +71,20 @@ function download_extract()
     # download_extract <appname>
     unset URL
     . $appsdir/${app}.env  &>/dev/null
+    cd $WRF_BASE/src
+
     if [ ! -z $URL ]; then
         download_package $URL
+    else
+        echo -e "$RED unknown app \"$package\" $RESET"
+        usage $0
+        exit 64
     fi
     [ $? == 0 ] && extract_package $package
+    cd -
 }
 
-###########################################################################
-# CODE STARTS FORM HERE
+# ------------------------------------------------------
 export BASE=${BASE:-$WRF_BASE}
 
 # check needed environment variables are present or not
@@ -124,26 +130,9 @@ while [ $counter -lt $nofargs ]; do
             done
             ;;
 
-        -e )
-            shift
-            for app in ${apps[@]};
-            do
-                download_extract ${app}
-            done
-            ;;
-
         *)
-            unset URL
-            package="${1%.[^.]*}" # strip out ".env" if available
-            . $appsdir/${package}.env  &>/dev/null
-            if [ ! -z $URL ]; then
-                download_package $URL
-            else
-                echo -e "$RED unknown app \"$package\" $RESET"
-                usage $0
-                exit 64
-            fi
-            [ $? == 0 ] && extract_package $package
+            app="${1%.[^.]*}" # strip out ".env" if available
+            download_extract ${app}
             ;;
 
     esac
