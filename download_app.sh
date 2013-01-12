@@ -66,6 +66,17 @@ function extract_package()
     esac
 }
 
+function download_extract()
+{
+    # download_extract <appname>
+    unset URL
+    . $appsdir/${app}.env  &>/dev/null
+    if [ ! -z $URL ]; then
+        download_package $URL
+    fi
+    [ $? == 0 ] && extract_package $package
+}
+
 ###########################################################################
 # CODE STARTS FORM HERE
 export BASE=${BASE:-$WRF_BASE}
@@ -104,55 +115,39 @@ unset app
 #
 counter=0
 nofargs=$#
-while [ $counter -le $nofargs ]; do
+while [ $counter -lt $nofargs ]; do
     case $1 in
-        -e)
-
-            shift
+        all|ALL)
+            for app in ${apps[@]};
+            do
+                download_extract ${app}
+            done
             ;;
 
-        * )
-            case $1 in
-                all|ALL)
-                    for app in ${apps[@]};
-                    do
-                        unset URL
-                        . $appsdir/${app}.env  &>/dev/null
-                        if [ ! -z $URL ]; then
-                            download_package $URL
-                        fi
-                        [ $? == 0 ] && extract_package $package
-                    done
-                    ;;
-
-                -e )
-                    shift
-                    for app in ${apps[@]};
-                    do
-                        unset URL
-                        . $appsdir/${app}.env  &>/dev/null
-                        extract_package $package
-                    done
-                    ;;
-
-                *)
-                    unset URL
-                    package="${1%.[^.]*}" # strip out ".env" if available
-                    . $appsdir/${package}.env  &>/dev/null
-                    if [ ! -z $URL ]; then
-                        download_package $URL
-                    else
-                        echo -e "$RED unknown app \"$package\" $RESET"
-                        usage $0
-                        exit 64
-                    fi
-                    [ $? == 0 ] && extract_package $package
-                    ;;
-
-            esac
+        -e )
             shift
+            for app in ${apps[@]};
+            do
+                download_extract ${app}
+            done
             ;;
+
+        *)
+            unset URL
+            package="${1%.[^.]*}" # strip out ".env" if available
+            . $appsdir/${package}.env  &>/dev/null
+            if [ ! -z $URL ]; then
+                download_package $URL
+            else
+                echo -e "$RED unknown app \"$package\" $RESET"
+                usage $0
+                exit 64
+            fi
+            [ $? == 0 ] && extract_package $package
+            ;;
+
     esac
+    shift
     let counter=counter+1
 done
 exit 0
