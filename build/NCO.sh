@@ -4,6 +4,8 @@ export NETCDF_LIB
 
 ./configure \
     --prefix=$NCO_ROOT \
+    --includedir=$NETCDF4_ROOT/include \
+    --libdir=$NETCDF4_ROOT/lib \
     --enable-fortran \
     --enable-netcdf4 \
     --enable-udunits2 \
