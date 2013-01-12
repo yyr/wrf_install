@@ -53,3 +53,11 @@ $SCRIPTS_DIR/build/fix.configure.wrf.sh
 [ -f $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh ] && $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
 
 ./compile em_real  2>&1 | tee log.${COMP}.compile
+
+
+# make symlinks to run folder is available. this is part of my workflow. see
+# my folder structure at https://github.com/yyr/wrf-autorun#readme
+if [ -d ../../run/bin/ ]; then
+    find . -iname '*.exe' -type f | xargs -t -I {} cp {} {}.$COMP
+    find . -iname '*.exe.'${COMP} -type f | xargs -t -I {}  cp {} ../../run/bin/
+fi
