@@ -1,4 +1,3 @@
-
 ./configure \
     --prefix=$MPICH_ROOT | tee ${APP}.${COMP}.config
 
