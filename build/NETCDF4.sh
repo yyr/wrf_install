@@ -1,3 +1,5 @@
+export CFLAGS="-I${HDF5_ROOT}/include" LDFLAGS="-L${HDF5_ROOT}/lib $CPPFLAGS"
+
 ./configure \
     --prefix=$NETCDF4_ROOT \
     --enable-fortran \
