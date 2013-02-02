@@ -15,8 +15,8 @@ compiler=gcc
 export machine=ubuntu
 
 # following setting is useful when you want to build WRF with different
-# compilers but not its the dependencies. if you dont understand what it is
-# right now, leave it "as it is"(tm)
+# compilers but not its the dependencies. I generally set it to "deps". If you
+# dont understand what it is right now, leave it 'as it is'™.
 export dep_root=$compiler                 # where to install common dependencies.
 
 #------- NO NEED TO EDIT BELOW ----------
