@@ -1,6 +1,6 @@
 # GRADS
-APP=grads-2.0.2-src
+APP=grads-2.0.1-src
 EXT=tar.gz
-DIR=grads-2.0.2
+DIR=grads-2.0.1
 URL=ftp://iges.org/grads/2.0/$APP.$EXT
 GRADS_ROOT=$WRF_BASE/$dep_root
