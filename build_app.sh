@@ -74,6 +74,8 @@ function build_app()
     if [ $? -ne 0 ]; then
         echo Failed building ${1}.
         exit
+    else
+        echo Successfully built ${1}
     fi
 }
 
