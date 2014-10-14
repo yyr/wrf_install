@@ -53,6 +53,13 @@ function build_app()
         cd $WRF_BASE/src/${DIR}
     else
         echo "warning: no directory named $WRF_BASE/src/${DIR}"
+        echo "Fresh download"
+        $SCRIPTS_DIR/download_app.sh ${1}
+        if [ $? -ne 0 ]; then
+            echo Failed to download: ${1}.
+            exit 2
+        fi
+        cd $WRF_BASE/src/${DIR}
     fi
 
     for dep in ${DEP[@]}; do        # soruce dep envs
