@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+source $SCRIPTS_DIR/lib/fun.bash
+
+
 # change list.
 app_list=(
     ZLIB
@@ -78,7 +81,7 @@ function build_app()
         echo Failed building ${1}.
         exit
     else
-        echo Successfully built ${1}
+        green_echo Successfully built ${1}
     fi
 }
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 # download apps from env
 
-RESET='\e[0m'
-RED="\E[31m"
-GREEN='\E[32m'
+source $SCRIPTS_DIR/lib/fun.bash
 
 function usage()
 {
@@ -28,11 +26,11 @@ function download_package()
     echo wget -c --no-check-certificate $@ -P $BASE/src -O ${APP}.${EXT}
     wget -c --no-check-certificate $@ -P $BASE/src -O ${APP}.${EXT}
     if [ $? -ne 0 ]; then
-        echo -e "$RED FAILED TO DOWNLOAD.. $APP ;($RESET"
+        red_echo "FAILED TO DOWNLOAD.. :( $APP"
         return 64
     else
         echo
-        echo -e "$GREEN Finished Downloading... $APP :)$RESET"
+        green_echo "Finished Downloading... $APP :)"
     fi
     return 0
 }
@@ -77,7 +75,7 @@ function download_extract()
     if [ ! -z $URL ]; then
         download_package $URL
     else
-        echo -e "$RED unknown app \"$package\" $RESET"
+        red_echo "Unknown app \"$package\" "
         usage $0
         exit 64
     fi
