@@ -1,5 +1,8 @@
+#!/usr/bin/env bash
+
 # change list.
-app_list=(ZLIB
+app_list=(
+    ZLIB
     SZIP
     JPEG
     JASPER

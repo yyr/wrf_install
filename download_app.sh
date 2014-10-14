@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # download apps from env
 
 RESET='\e[0m'
