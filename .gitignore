@@ -2,3 +2,8 @@
 *.pdf
 *.html
 *.gz
+*.check
+*.clean
+*.config
+*.install
+*.make
