@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # download apps from env
 
-source $SCRIPTS_DIR/lib/fun.bash
+THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_FILE_DIR/lib/fun.bash
 
+# functions
 function usage()
 {
     cat <<EOF
@@ -22,7 +24,7 @@ EOF
 
 function download_package()
 {
-    echo "Downloading.... $APP"
+    blue_echo "Downloading.... $APP"
     echo wget -c --no-check-certificate $@ -P $BASE/src -O ${APP}.${EXT}
     wget -c --no-check-certificate $@ -P $BASE/src -O ${APP}.${EXT}
     if [ $? -ne 0 ]; then
@@ -49,18 +51,18 @@ function extract_package()
     case ${EXT} in
         *"gz"|*"tgz" )
             tar xzvf $appsrc &> $logdir/$extractlog &&
-            echo "extraction is done and log is written to \"$logdir/$extractlog\""
+                blue_echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         *"zip" )
             unzip $appsrc &> $logdir/$extractlog &&
-            echo "extraction is done and log is written to \"$logdir/$extractlog\""
+                blue_echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         *"tar" )
             tar xvf $appsrc &> $logdir/$extractlog &&
-            echo "extraction is done and log is written to \"$logdir/$extractlog\""
+                blue_echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         * )
-            echo  "dont know how to extract this one:" ${APP}.${EXT}
+            blue_echo  "dont know how to extract this one:" ${APP}.${EXT}
             ;;
     esac
 }
@@ -87,19 +89,7 @@ function download_extract()
 export BASE=${BASE:-$WRF_BASE}
 echo $BASE
 
-# check needed environment variables are present or not
-env_error=24
-if [ -z $BASE ]; then
-    echo BASE variable is empty
-    echo did you source the SOURCEME file.?
-    echo run \"source SOURCEME\"
-    exit $env_error
-elif [ -z $SCRIPTS_DIR ]; then
-    echo SCRIPTS_DIR variable is empty
-    echo did you source the SOURCEME file.?
-    echo run \"source SOURCEME\"
-    exit $env_error
-fi
+
 
 mkdir -p $BASE/src      # Setup source directory
 

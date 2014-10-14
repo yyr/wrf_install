@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source $SCRIPTS_DIR/lib/fun.bash
+THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_FILE_DIR/lib/fun.bash
 
 
 # change list.
@@ -52,17 +53,17 @@ EOF
 function build_app()
 {
     export LANG=C
-    echo "Building \"$1\" .... "
+    blue_echo "Building \"$1\" .... "
     . $appsdir/${1}.env
 
     if [ -d $WRF_BASE/src/${DIR} ]; then
         cd $WRF_BASE/src/${DIR}
     else
-        echo "warning: no directory named $WRF_BASE/src/${DIR}"
-        echo "Fresh download"
+        red_echo "WARNING: no directory named $WRF_BASE/src/${DIR}"
+        blue_echo "Trying to initiate download"
         $SCRIPTS_DIR/download_app.sh ${1}
         if [ $? -ne 0 ]; then
-            echo Failed to download: ${1}.
+            red_echo Failed to download: ${1}.
             exit 2
         fi
         cd $WRF_BASE/src/${DIR}
@@ -78,7 +79,7 @@ function build_app()
     . ${SCRIPTS_DIR}/build/${1}.sh
 
     if [ $? -ne 0 ]; then
-        echo Failed building ${1}.
+        red_echo Failed building ${1}.
         exit
     else
         green_echo Successfully built ${1}
