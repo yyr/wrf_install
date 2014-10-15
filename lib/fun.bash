@@ -43,7 +43,7 @@ function command_runner()
     cmd=${@:1:$(($#-1))}
     logfile=${@: -1}
 
-    if test "$teeing" = "true"; then
+    if [[ "$teeing" = "true" ]]; then
         eval $cmd 2>&1 | tee $logfile
     else
         eval $cmd > $logfile 2>&1
