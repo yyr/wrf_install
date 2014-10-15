@@ -38,10 +38,11 @@ please run \"source SOURCEME\" in root directory"
 # runners
 function command_runner()
 {
-    blue_echo "Running: " $1
-    blue_echo "To moniter log file run: tail -f $(pwd)/$2"
     cmd=${@:1:$(($#-1))}
     logfile=${@: -1}
+
+    blue_echo "Running: " $cmd
+    blue_echo "To moniter log file run: tail -f $(pwd)/$logfile"
 
     if [[ "$teeing" = "true" ]]; then
         eval $cmd 2>&1 | tee $logfile
