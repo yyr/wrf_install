@@ -1,4 +1,7 @@
-./configure \
+source ${SCRIPTS_DIR}/lib/fun.bash
+
+command_runner \
+    ./configure \
     --prefix=$NCVIEW_ROOT \
     --enable-fortran \
     --with-hdf5=$HDF5_ROOT \
@@ -6,9 +9,16 @@
     --with-x \
     --with-udunits2_incdir=$UDUNITS2_ROOT/include \
     --with-udunits2_libdir=$UDUNITS2_ROOT/lib \
-     | tee ${APP}.${COMP}.config
+    ${APP}.${COMP}.config
 
-make clean 2>&1 | tee ${APP}.${COMP}.clean
-make 2>&1 | tee ${APP}.${COMP}.make
-# make check 2>&1 | tee ${APP}.${COMP}.check
-make install 2>&1 | tee ${APP}.${COMP}.install
+command_runner \
+    make clean   ${APP}.${COMP}.clean
+
+command_runner \
+    make   ${APP}.${COMP}.make
+
+# command_runner \
+# make check   ${APP}.${COMP}.check
+
+command_runner \
+    make install   ${APP}.${COMP}.install
