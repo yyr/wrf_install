@@ -19,6 +19,9 @@ export machine=ubuntu
 # dont understand what it is right now, leave it 'as it is'™.
 export dep_root=$compiler                 # where to install common dependencies.
 
+# Some customization.
+export teeing=false
+
 #------- NO NEED TO EDIT BELOW ----------
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
 export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)

@@ -33,3 +33,22 @@ please run \"source SOURCEME\" in root directory"
         exit $ecode_fatal
     fi
 }
+
+
+# runners
+function command_runner()
+{
+    blue_echo "Running: " $1
+    blue_echo "To moniter log file run: tail -f $(pwd)/$2"
+    if test "$teeing" = "true"; then
+        eval $1 2>&1 | tee $2
+    else
+        $1 > $2 2>&1
+    fi
+    if [ $? != 0 ]; then
+        echo "Failed"
+        exit $?
+    else
+        green_echo "Done"
+    fi
+}

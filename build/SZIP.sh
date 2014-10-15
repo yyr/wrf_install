@@ -1,5 +1,7 @@
-./configure --prefix=$SZIP_ROOT | tee ${APP}.${COMP}.config
-make clean 2>&1 | tee ${APP}.${COMP}.clean
-make 2>&1 | tee ${APP}.${COMP}.make
-# make check 2>&1 | tee ${APP}.${COMP}.check
-make install 2>&1 | tee ${APP}.${COMP}.install
+source ${SCRIPTS_DIR}/lib/fun.bash
+
+command_runner "./configure --prefix=$SZIP_ROOT" "${APP}.${COMP}.config"
+command_runner "make clean"  "${APP}.${COMP}.clean"
+command_runner "make"        "${APP}.${COMP}.make"
+# command_runner "make check" "${APP}.${COMP}.check"
+command_runner "make install"  "${APP}.${COMP}.install"
