@@ -89,13 +89,7 @@ function download_extract()
 }
 
 # ------------------------------------------------------
-export BASE=${BASE:-$WRF_BASE}
-echo $BASE
-
-
-
 mkdir -p $BASE/src      # Setup source directory
-
 apps=()
 for envfile in `find $appsdir -maxdepth 1 -type f  -name "*.env"` ; do
     temp="${envfile##*/}" # strip out path name
