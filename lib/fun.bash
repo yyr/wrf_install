@@ -40,13 +40,17 @@ function command_runner()
 {
     blue_echo "Running: " $1
     blue_echo "To moniter log file run: tail -f $(pwd)/$2"
+    cmd=${@:1:$(($#-1))}
+    logfile=${@: -1}
+
     if test "$teeing" = "true"; then
-        eval $1 2>&1 | tee $2
+        eval $cmd 2>&1 | tee $logfile
     else
-        $1 > $2 2>&1
+        eval $cmd > $logfile 2>&1
     fi
     if [ $? != 0 ]; then
-        echo "Failed"
+        red_echo "Failed"
+        # red_echo Some thig is wrong.. Trying to continue..
         exit $?
     else
         green_echo "Done"
