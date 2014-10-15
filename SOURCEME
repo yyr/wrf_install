@@ -31,6 +31,7 @@ fi
 
 # some internal varialbles
 export appsdir=$SCRIPTS_DIR/apps
+export BASE=$WRF_BASE
 
 # let user know what kind of set up (s)he asked for
 echo '================================================================='
