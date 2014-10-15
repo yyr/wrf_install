@@ -4,6 +4,9 @@
 THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $THIS_FILE_DIR/lib/fun.bash
 
+# Check for Environmental varables.
+sourceme_sourced
+
 # functions
 function usage()
 {
