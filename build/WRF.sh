@@ -15,6 +15,7 @@ fi
 cd $WRF_ROOT
 
 export NETCDF=${NETCDF4_ROOT}
+export NETCDFPATH=${NETCDF_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
 export WRF_DA_CORE=0
 export JASPERLIB=${JASPER_ROOT}/lib
@@ -22,13 +23,13 @@ export JASPERINC=${JASPER_ROOT}/include
 export LD_LIBRARY_PATH=${WRF_BASE}/$dep_root/lib:$LD_LIBRARY_PATH
 export LIBINCLUDE="${WRF_BASE}/$dep_root/lib:${WRF_BASE}/$dep_root/include":$LIBINCLUDE
 
-echo NETCDF=$NETCDF
-echo WRFIO_NCD_LARGE_FILE_SUPPORT=$WRFIO_NCD_LARGE_FILE_SUPPORT
-echo WRF_DA_CORE=$WRF_DA_CORE
-echo JASPERLIB=$JASPERLIB
-echo JASPERINC=$JASPERINC
-echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-echo LIBINCLUDE=$LIBINCLUDE
+blue_echo NETCDF=$NETCDF
+blue_echo WRFIO_NCD_LARGE_FILE_SUPPORT=$WRFIO_NCD_LARGE_FILE_SUPPORT
+blue_echo WRF_DA_CORE=$WRF_DA_CORE
+blue_echo JASPERLIB=$JASPERLIB
+blue_echo JASPERINC=$JASPERINC
+blue_echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+blue_echo LIBINCLUDE=$LIBINCLUDE
 
 ./clean -a         # clean first
 
@@ -38,12 +39,18 @@ if [ -f "$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select" ]; then
     ./configure  < $SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select
 else
     ./configure
-    echo " **IMPORTANT**
-You can automate the selection of configuration option by editing/creating
-\"$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select\" press ENTER to
-continue to configure"
-    read dummy
+    blue_echo "You can automate the selection of configuration option by
+editing/creating \"$SCRIPTS_DIR/${machine}/configure.wrf.${COMP}.select\"
+\n\n\n"
 fi
+
+red_echo " **IMPORTANT**
+Moving to building WRF now. You can still change configure script
+$(pwd)/configure.wrf for any final changes.
+
+ Press ENTER to continue."
+read dummy
+
 
 # ----------- tweak generated "configure.wrf" file -----------------
 ## common problems of configure.wrf should be fixed in the following script
