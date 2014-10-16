@@ -11,6 +11,7 @@ app_list=(
     ZLIB
     SZIP
     JPEG
+    LIBPNG
     JASPER
     UDUNITS2
     MPICH

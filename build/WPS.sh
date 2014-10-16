@@ -1,3 +1,5 @@
+source ${SCRIPTS_DIR}/lib/fun.bash
+
 #----------*IMPORTANT*--------------------------------------------------
 export WRF_EM_CORE=1            # for em core
 # export WRF_NMM_CORE=1         #  for nmm core
@@ -60,7 +62,8 @@ $SCRIPTS_DIR/build/fix.configure.wps.sh
     $SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh
 
 # read dummy                      # manual inspection
-./compile  2>&1 | tee log.${COMP}.compile
+command_runner \
+    ./compile  log.${COMP}.compile
 
 
 # make symlinks to run folder is available. this is part of my workflow. see

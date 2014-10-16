@@ -62,7 +62,8 @@ $SCRIPTS_DIR/build/fix.configure.wrf.sh
 [ -f $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh ] &&
     $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
 
-./compile em_real  2>&1 | tee log.${COMP}.compile
+command_runner \
+./compile em_real  log.${COMP}.compile
 
 
 # make symlinks to run folder is available. this is part of my workflow. see
