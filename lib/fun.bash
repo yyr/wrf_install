@@ -10,17 +10,17 @@ GREEN='\e[32m'
 
 function red_echo()
 {
-    printf "${RED}$@${RESET}"
+    printf "${RED}$@${RESET}\n"
 }
 
 function green_echo()
 {
-    printf "${GREEN}$@${RESET}"
+    printf "${GREEN}$@${RESET}\n"
 }
 
 function blue_echo()
 {
-    printf "${BLUE}$@${RESET}"
+    printf "${BLUE}$@${RESET}\n"
 }
 
 #
@@ -41,7 +41,7 @@ function command_runner()
     cmd=${@:1:$(($#-1))}
     logfile=${@: -1}
 
-    blue_echo "Running: " $cmd
+    blue_echo "Running: $cmd"
     blue_echo "To moniter log file run: tail -f $(pwd)/$logfile"
 
     if [[ "$teeing" = "true" ]]; then
