@@ -28,14 +28,8 @@ EOF
 function download_package()
 {
     blue_echo "Downloading.... $APP"
-    wget -c  $@ -P $BASE/src -O ${APP}.${EXT}
-    if [ $? -ne 0 ]; then
-        red_echo "FAILED TO DOWNLOAD.. :( $APP"
-        return 64
-    else
-        echo
-        green_echo "Finished Downloading... $APP :)"
-    fi
+    command_runner \
+        wget -c  $@ -P $BASE/src -O ${APP}.${EXT} log.download.${APP}
     return 0
 }
 
@@ -101,7 +95,6 @@ then
     echo "${#} arguments."
     usage $0
 fi
-
 
 unset app
 #
