@@ -143,8 +143,12 @@ versions of `wrf_install`.
 
 FAQ
 ===
+See doc folder
 
-Check file in folder
+License
+=======
+GPL 3 (or later); see COPYING file.
+
 
 Contributing
 ============
