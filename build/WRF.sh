@@ -1,3 +1,5 @@
+source ${SCRIPTS_DIR}/lib/fun.bash
+
 #----------*IMPORTANT*--------------------------------------------------
 export WRF_EM_CORE=1        # for em core
 # export WRF_NMM_CORE=1     #  for nmm core
@@ -50,14 +52,14 @@ $SCRIPTS_DIR/build/fix.configure.wrf.sh
 # ----------- tweak generated "configure.wrf" file (compiler specific)------------
 # for eg if you want to change configure.wrf file put some code in your
 # check fix.configure.wrf.intel.sh
-[ -f $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh ] && $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
+[ -f $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh ] &&
+    $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
 
 ./compile em_real  2>&1 | tee log.${COMP}.compile
 
 
 # make symlinks to run folder is available. this is part of my workflow. see
 # my folder structure at https://github.com/yyr/wrf-autorun#readme
-if [ -d ../../run/bin/ ]; then
-    find . -iname '*.exe' -type f | xargs -t -I {} cp {} {}.$COMP
-    find . -iname '*.exe.'${COMP} -type f | xargs -t -I {}  cp {} ../../run/bin/
-fi
+[ -d ../../run/bin/ ] || mkdir -p ../../run/bin/
+find . -iname '*.exe' -type f | xargs -t -I {} cp {} {}.$COMP
+find . -iname '*.exe.'${COMP} -type f | xargs -t -I {}  cp {} ../../run/bin/
