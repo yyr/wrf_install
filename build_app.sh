@@ -85,7 +85,7 @@ function build_app()
         red_echo Failed building ${1}.
         exit
     else
-        green_echo Successfully built ${1}
+        green_echo "Successfully built ${1} \n\n"
     fi
 }
 

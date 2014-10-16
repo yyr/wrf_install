@@ -39,8 +39,7 @@ function mk_dirs
 {
     local dirs=(${@})
     for dir in "${dirs[@]}"; do
-        echo mkdir -p $dir
-        mkdir -p $dir
+        [ -d $dir ] || mkdir -p $dir
     done
 }
 
