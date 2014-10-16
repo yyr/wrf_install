@@ -10,17 +10,17 @@ GREEN='\e[32m'
 
 function red_echo()
 {
-    echo -e ${RED}$@${RESET}
+    printf "${RED}$@${RESET}"
 }
 
 function green_echo()
 {
-    echo -e ${GREEN}$@${RESET}
+    printf "${GREEN}$@${RESET}"
 }
 
 function blue_echo()
 {
-    echo -e ${BLUE}$@${RESET}
+    printf "${BLUE}$@${RESET}"
 }
 
 #
@@ -29,7 +29,7 @@ function sourceme_sourced()
 {
     if [ -z $BASE ] || [ -z $SCRIPTS_DIR ]; then
         red_echo "Environmental variables is not set. \
-please run \"source SOURCEME\" in root directory"
+please run \"source SOURCEME\" in 'wrf_install' directory."
         exit $ecode_fatal
     fi
 }
