@@ -61,3 +61,10 @@ $SCRIPTS_DIR/build/fix.configure.wps.sh
 
 # read dummy                      # manual inspection
 ./compile  2>&1 | tee log.${COMP}.compile
+
+
+# make symlinks to run folder is available. this is part of my workflow. see
+# my folder structure at https://github.com/yyr/wrf-autorun#readme
+[ -d ../../run/bin/ ] || mkdir -p ../../run/bin/
+find . -iname '*.exe' -type f | xargs -t -I {} cp {} {}.$COMP
+find . -iname '*.exe.'${COMP} -type f | xargs -t -I {}  cp {} ../../run/bin/
