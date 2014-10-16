@@ -28,8 +28,8 @@ EOF
 function download_package()
 {
     blue_echo "Downloading.... $APP"
-    echo wget -c --no-check-certificate $@ -P $BASE/src -O ${APP}.${EXT}
-    wget -c --no-check-certificate $@ -P $BASE/src -O ${APP}.${EXT}
+    echo wget -c  $@ -P $BASE/src -O ${APP}.${EXT}
+    wget -c  $@ -P $BASE/src -O ${APP}.${EXT}
     if [ $? -ne 0 ]; then
         red_echo "FAILED TO DOWNLOAD.. :( $APP"
         return 64
