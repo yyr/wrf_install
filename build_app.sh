@@ -62,7 +62,7 @@ function build_app()
     if [ -d $WRF_BASE/src/${DIR} ]; then
         cd $WRF_BASE/src/${DIR}
     else
-        red_echo "WARNING: no directory named $WRF_BASE/src/${DIR}"
+        red_echo "WARNING: Seems $1 hasn't been downloaded yet."
         blue_echo "Trying to initiate download"
         $SCRIPTS_DIR/download_app.sh ${1}
         if [ $? -ne 0 ]; then
@@ -77,7 +77,7 @@ function build_app()
     done
     . $appsdir/${1}.env
 
-    echo $(pwd)
+    blue_echo "Entering $(pwd) to build ${1}"
 
     . ${SCRIPTS_DIR}/build/${1}.sh
 
