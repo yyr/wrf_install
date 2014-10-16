@@ -35,6 +35,16 @@ please run \"source SOURCEME\" in 'wrf_install' directory."
 }
 
 
+function mk_dirs
+{
+    local dirs=(${@})
+    for dir in "${dirs[@]}"; do
+        echo mkdir -p $dir
+        mkdir -p $dir
+    done
+}
+
+
 # runners
 function command_runner()
 {

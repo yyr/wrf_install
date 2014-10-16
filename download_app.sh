@@ -82,7 +82,9 @@ function download_extract()
 }
 
 # ------------------------------------------------------
-mkdir -p $BASE/src      # Setup source directory
+base_dirs=("$BASE/src" "$BASE/run")
+mk_dirs ${base_dirs[@]}  # Setup source directies.
+
 apps=()
 for envfile in `find $appsdir -maxdepth 1 -type f  -name "*.env"` ; do
     temp="${envfile##*/}" # strip out path name
