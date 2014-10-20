@@ -5,20 +5,20 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.define "wrf_install", primary: true do |wrf_install|
+  config.vm.define "trusty64", primary: true do |trusty64|
     # Every Vagrant virtual environment requires a box to build off of.
-    wrf_install.vm.box = "ubuntu/trusty64"
-    wrf_install.vm.host_name = 'wrf'
+    trusty64.vm.box = "ubuntu/trusty64"
+    trusty64.vm.host_name = 'wrf'
 
     # config.ssh.forward_agent = true
-    wrf_install.vm.synced_folder ".", "/wrf_install"
+    trusty64.vm.synced_folder ".", "/wrf_install"
 
-    wrf_install.vm.provider :virtualbox do |vb|
+    trusty64.vm.provider :virtualbox do |vb|
       # vb.gui = true
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
 
-    wrf_install.vm.provision "ansible" do |ansible|
+    trusty64.vm.provision "ansible" do |ansible|
       ansible.playbook = "playbooks/vm.yml"
     end
   end

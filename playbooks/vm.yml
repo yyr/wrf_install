@@ -1,5 +1,5 @@
 - name: Setup
-  hosts: all
+  hosts: trusty64
   gather_facts: false
   vars:
     home: /home/vagrant
