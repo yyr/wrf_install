@@ -1,9 +1,10 @@
-*.tex
-*.pdf
-*.html
 *.gz
+*.zip
 *.check
 *.clean
 *.config
 *.install
 *.make
+
+# vagrant
+/.vagrant/
