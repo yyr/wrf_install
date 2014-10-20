@@ -17,5 +17,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # vb.gui = true
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
+
+    wrf_install.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbooks/vm.yml"
+    end
   end
 end
