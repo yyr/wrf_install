@@ -29,7 +29,7 @@ function download_package()
 {
     blue_echo "Downloading.... $APP"
     command_runner \
-        wget -c  $@ -P $BASE/src -O ${APP}.${EXT} log.download.${APP}
+        wget --no-check-certificate -c  $@ -P $BASE/src -O ${APP}.${EXT} log.download.${APP}
     return 0
 }
 
