@@ -19,9 +19,14 @@ export machine=ubuntu
 # dont understand what it is right now, leave it 'as it is'™.
 export dep_root=$compiler                 # where to install common dependencies.
 
+# Some customization.
+export teeing=false
+
 #------- NO NEED TO EDIT BELOW ----------
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
 export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
+source $SCRIPTS_DIR/lib/fun.bash
+
 
 if [  "$0" == "$BASH_SOURCE" ]; then
     echo "--: please source me instead of running as shown below :--"
@@ -31,6 +36,7 @@ fi
 
 # some internal varialbles
 export appsdir=$SCRIPTS_DIR/apps
+export BASE=$WRF_BASE
 
 # let user know what kind of set up (s)he asked for
 echo '================================================================='
@@ -42,7 +48,7 @@ echo "dep_root=$dep_root  # where dependencies will be installed"
 echo '================================================================='
 echo
 
-# unset first
+# Unset first
 unset COMP CC CFLAGS CXX CXXFLAGS CPP CXXFLAGS FC F77 F9X FFLAGS
 
 # load envis for the COMPILER
@@ -57,15 +63,16 @@ else
     return 128
 fi
 
-echo " ** IMPORTANT **
-Compiler flags are set. If like to change any of following values,
-please visit these files.
+red_echo " ** IMPORTANT **
+Compiler flags are set. If you like to change any of following values,
+please see these files.
 
     \"$SCRIPTS_DIR/${compiler}/compiler.env\"
-    \"$SCRIPTS_DIR/${machine}/${COMP}.env\"   (change if available/create if necessary)
+    \"$SCRIPTS_DIR/${machine}/${COMP}.env\"   (Change if available/create if necessary)
 
 and source this file again.
 "
+
 echo '-----------------------------------------------------------------'
 echo COMP=$COMP
 echo CC=$CC

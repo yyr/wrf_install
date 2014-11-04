@@ -1,0 +1,21 @@
+- name: Setup
+  hosts: trusty64
+  gather_facts: false
+  vars:
+    home: /home/vagrant
+  sudo: True
+  tasks:
+    - name: Configure locale
+      copy: dest='/etc/default/locale' mode=0644 owner=root group=root
+            content='LC_ALL=en_US.utf8\nLANG=en_US.utf8\n'
+    - name: Install dependencies
+      apt: name={{item}} state=latest install_recommends=false
+      with_items:
+        - build-essential
+        - unzip
+        - gfortran
+        - cmake
+        - csh
+    - name: cd to repo directory.
+      lineinfile: dest="{{home}}/.bashrc" state=present
+                  line="cd /wrf_install" insertafter=EOF

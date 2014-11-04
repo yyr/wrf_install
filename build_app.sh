@@ -1,7 +1,17 @@
+#!/usr/bin/env bash
+
+THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_FILE_DIR/lib/fun.bash
+
+# Check for Environmental varables.
+sourceme_sourced
+
 # change list.
-app_list=(ZLIB
+app_list=(
+    ZLIB
     SZIP
     JPEG
+    LIBPNG
     JASPER
     UDUNITS2
     MPICH
@@ -46,13 +56,20 @@ EOF
 function build_app()
 {
     export LANG=C
-    echo "Building \"$1\" .... "
+    blue_echo "Building \"$1\" .... "
     . $appsdir/${1}.env
 
     if [ -d $WRF_BASE/src/${DIR} ]; then
         cd $WRF_BASE/src/${DIR}
     else
-        echo "warning: no directory named $WRF_BASE/src/${DIR}"
+        red_echo "WARNING: Seems $1 hasn't been downloaded yet."
+        blue_echo "Trying to initiate download"
+        $SCRIPTS_DIR/download_app.sh ${1}
+        if [ $? -ne 0 ]; then
+            red_echo Failed to download: ${1}.
+            exit 2
+        fi
+        cd $WRF_BASE/src/${DIR}
     fi
 
     for dep in ${DEP[@]}; do        # soruce dep envs
@@ -60,13 +77,15 @@ function build_app()
     done
     . $appsdir/${1}.env
 
-    echo $(pwd)
+    blue_echo "Entering $(pwd) to build ${1}"
 
     . ${SCRIPTS_DIR}/build/${1}.sh
 
     if [ $? -ne 0 ]; then
-        echo Failed building ${1}.
+        red_echo Failed building ${1}.
         exit
+    else
+        green_echo "Successfully built ${1} \n\n"
     fi
 }
 

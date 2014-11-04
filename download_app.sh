@@ -1,10 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # download apps from env
 
-RESET='\e[0m'
-RED="\E[31m"
-GREEN='\E[32m'
+THIS_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_FILE_DIR/lib/fun.bash
 
+# Check for Environmental varables.
+sourceme_sourced
+
+# functions
 function usage()
 {
     cat <<EOF
@@ -24,16 +27,9 @@ EOF
 
 function download_package()
 {
-    echo "Downloading.... $APP"
-    echo wget -c $@ -P $BASE/src -O ${APP}.${EXT}
-    wget -c $@ -P $BASE/src -O ${APP}.${EXT}
-    if [ $? -ne 0 ]; then
-        echo -e "$RED FAILED TO DOWNLOAD.. $APP ;($RESET"
-        return 64
-    else
-        echo
-        echo -e "$GREEN Finished Downloading... $APP :)$RESET"
-    fi
+    blue_echo "Downloading.... $APP"
+    command_runner \
+        wget -c  $@ -P $BASE/src -O ${APP}.${EXT} log.download.${APP}
     return 0
 }
 
@@ -51,18 +47,18 @@ function extract_package()
     case ${EXT} in
         *"gz"|*"tgz" )
             tar xzvf $appsrc &> $logdir/$extractlog &&
-            echo "extraction is done and log is written to \"$logdir/$extractlog\""
+                blue_echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         *"zip" )
             unzip $appsrc &> $logdir/$extractlog &&
-            echo "extraction is done and log is written to \"$logdir/$extractlog\""
+                blue_echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         *"tar" )
             tar xvf $appsrc &> $logdir/$extractlog &&
-            echo "extraction is done and log is written to \"$logdir/$extractlog\""
+                blue_echo "extraction is done and log is written to \"$logdir/$extractlog\""
             ;;
         * )
-            echo  "dont know how to extract this one:" ${APP}.${EXT}
+            blue_echo  "dont know how to extract this one:" ${APP}.${EXT}
             ;;
     esac
 }
@@ -77,7 +73,7 @@ function download_extract()
     if [ ! -z $URL ]; then
         download_package $URL
     else
-        echo -e "$RED unknown app \"$package\" $RESET"
+        red_echo "Unknown app \"$package\" "
         usage $0
         exit 64
     fi
@@ -86,24 +82,8 @@ function download_extract()
 }
 
 # ------------------------------------------------------
-export BASE=${BASE:-$WRF_BASE}
-echo $BASE
-
-# check needed environment variables are present or not
-env_error=24
-if [ -z $BASE ]; then
-    echo BASE variable is empty
-    echo did you source the SOURCEME file.?
-    echo run \"source SOURCEME\"
-    exit $env_error
-elif [ -z $SCRIPTS_DIR ]; then
-    echo SCRIPTS_DIR variable is empty
-    echo did you source the SOURCEME file.?
-    echo run \"source SOURCEME\"
-    exit $env_error
-fi
-
-mkdir -p $BASE/src      # Setup source directory
+base_dirs=("$BASE/src" "$BASE/run")
+mk_dirs ${base_dirs[@]}  # Setup source directies.
 
 apps=()
 for envfile in `find $appsdir -maxdepth 1 -type f  -name "*.env"` ; do
@@ -117,7 +97,6 @@ then
     echo "${#} arguments."
     usage $0
 fi
-
 
 unset app
 #

@@ -1,6 +1,9 @@
+source ${SCRIPTS_DIR}/lib/fun.bash
+
 export CFLAGS="-I${HDF5_ROOT}/include" LDFLAGS="-L${HDF5_ROOT}/lib $CPPFLAGS"
 
-./configure \
+command_runner \
+    ./configure \
     --prefix=$NETCDF4_ROOT \
     --enable-fortran \
     --enable-udunits \
@@ -9,9 +12,16 @@ export CFLAGS="-I${HDF5_ROOT}/include" LDFLAGS="-L${HDF5_ROOT}/lib $CPPFLAGS"
     --with-hdf5=$HDF5_ROOT \
     --with-pic \
     --with-libcf \
-    --disable-dap | tee ${APP}.${COMP}.config
+    --disable-dap  ${APP}.${COMP}.config
 
-make clean 2>&1 | tee ${APP}.${COMP}.clean
-make 2>&1 | tee ${APP}.${COMP}.make
-make check 2>&1 | tee ${APP}.${COMP}.check
-make install 2>&1 | tee ${APP}.${COMP}.install
+command_runner \
+    make clean   ${APP}.${COMP}.clean
+
+command_runner \
+    make   ${APP}.${COMP}.make
+
+# command_runner \
+# make check   ${APP}.${COMP}.check
+
+command_runner \
+    make install   ${APP}.${COMP}.install
