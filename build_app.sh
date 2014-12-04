@@ -11,13 +11,13 @@ app_list=(
     ZLIB
     SZIP
     JPEG
-    LIBPNG
+    # LIBPNG
     JASPER
     UDUNITS2
     MPICH
     HDF5
     NETCDF4
-    NCVIEW
+    # NCVIEW
     WRF
     WPS)
 
