@@ -9,4 +9,4 @@ make -f Makefile.ini
 cd ..
 read dummy
 
-make Everything |& tee make.log
+make Everything | tee make.log
