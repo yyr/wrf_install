@@ -48,7 +48,7 @@ Moving to building WPS now. You can still change configure script
 
  Press ENTER to continue."
 
-read dummy
+[[ $- == *i* ]] && read dummy
 
 
 # ----------- tweak generated "configure.wps" file -----------------

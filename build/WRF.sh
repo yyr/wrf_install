@@ -49,7 +49,7 @@ Moving to building WRF now. You can still change configure script
 $(pwd)/configure.wrf for any final changes.
 
  Press ENTER to continue."
-read dummy
+[[ $- == *i* ]] && read dummy
 
 
 # ----------- tweak generated "configure.wrf" file -----------------
