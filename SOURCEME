@@ -27,15 +27,15 @@ export teeing=false
 #export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 #it can fix error in zsh environment.
 if [ -z "$ZSH_NAME" ] && [ "x$0" = "x./SOURCEME" ]; then
-	red_echo "Error: This script needs to be sourced. Please run as 'source SOURCEME'" 
+	red_echo "Error: This script needs to be sourced. Please run as 'source SOURCEME'"
 	return 2
 else
 	if [ -n "$BASH_SOURCE" ]; then
-		SCRIPTS_DIR="`dirname $BASH_SOURCE`"
+		export SCRIPTS_DIR="`dirname $BASH_SOURCE`"
 	else
-		SCRIPTS_DIR="`pwd`"
+		export SCRIPTS_DIR="`pwd`"
 	fi
-	SCRIPTS_DIR=`readlink -f "$SCRIPTS_DIR"`
+	export SCRIPTS_DIR=`readlink -f "$SCRIPTS_DIR"`
 fi
 source $SCRIPTS_DIR/lib/fun.bash
 
