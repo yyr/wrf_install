@@ -70,4 +70,4 @@ command_runner \
 # my folder structure at https://github.com/yyr/wrf-autorun#readme
 [ -d ../../run/bin/ ] || mkdir -p ../../run/bin/
 find . -iname '*.exe' -type f | xargs -t -I {} cp {} {}.$COMP
-find . -iname '*.exe.'${COMP} -type f | xargs -t -I {}  cp {} ../../run/bin/
+find $(pwd) -iname '*.exe.'${COMP} -type f | xargs -t -I {}  ln -sf {} ../../run/bin/
