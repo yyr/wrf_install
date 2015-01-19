@@ -24,18 +24,18 @@ export teeing=false
 
 #------- NO NEED TO EDIT BELOW ----------
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
-#export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
 #it can fix error in zsh environment.
 if [ -z "$ZSH_NAME" ] && [ "x$0" = "x./SOURCEME" ]; then
-	red_echo "Error: This script needs to be sourced. Please run as 'source SOURCEME'"
-	return 2
+    red_echo "Error: This script needs to be sourced. Please run as 'source SOURCEME'"
+    return 2
 else
-	if [ -n "$BASH_SOURCE" ]; then
-		export SCRIPTS_DIR="`dirname $BASH_SOURCE`"
-	else
-		export SCRIPTS_DIR="`pwd`"
-	fi
-	export SCRIPTS_DIR=`readlink -f "$SCRIPTS_DIR"`
+    if [ -n "$BASH_SOURCE" ]; then
+        export SCRIPTS_DIR="`dirname $BASH_SOURCE`"
+    else
+        export SCRIPTS_DIR="`pwd`"
+    fi
+    export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
+    # export SCRIPTS_DIR=`readlink -f "$SCRIPTS_DIR"`
 fi
 source $SCRIPTS_DIR/lib/fun.bash
 
