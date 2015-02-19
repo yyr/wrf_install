@@ -1,3 +1,5 @@
+* Some random useful references,
+
 http://software.intel.com/en-us/articles/jpeg-7-installation-bkm/
 http://software.intel.com/en-us/articles/jasper-installation-bkm/
 http://software.intel.com/en-us/articles/performance-tools-for-software-developers-building-netcdf-with-the-intel-compilers/

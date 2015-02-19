@@ -1,3 +1,6 @@
+*Note 2015-02-19*: I am not really keen to implementing the following. I feel
+that doing following is stretching these scripts too far and also I have no
+need for doing it.
 
 * NEXT write status file of each app
 status of each may be
