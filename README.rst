@@ -1,5 +1,6 @@
 Website: https://github.com/yyr/wrf_install
 
+
 Introduction
 ============
 
@@ -14,8 +15,8 @@ How to use?
 
 *First suggestion is try to read and understand the scripts.*,
 
-. DANGER::
-  **Go slow for the first time**
+.. DANGER::
+   **Go slow for the first time**
 
 That said, here is very sketchy walk through:
 
@@ -110,11 +111,13 @@ Compiler options
 As it is said in the previous section when you source the file it
 invokes to get compiler setting. for gcc you need to customize file.
 
+
 Configure options
 -----------------
 
 Build directory contains individual build scripts. customize them
 accordingly.
+
 
 WRF & WPS
 ---------
@@ -146,6 +149,7 @@ versions of `wrf_install`.
 
 After first successful installation, go full scale.
 --------------------------------------------------
+
 As usual first source the SOURCEME file.
 
 .. code:: bash
@@ -154,7 +158,6 @@ As usual first source the SOURCEME file.
     ./download_app.sh all
 
 (This assumes you have figured out by now, how to automate WRF.sh, WPS.sh.)
-
 
 Good luck.
 
@@ -167,7 +170,9 @@ SOURCEME problems
 
 Source command not found.?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Change your shell to bash.
+
 
 Model Run
 ---------
