@@ -1,5 +1,5 @@
 # directory where installation takes place
-export WRF_BASE=~/wrf
+export WRF_BASE=/media/robert/HDD/WRF/
 
 # | intel  | for intel compilers     |
 # | gcc    | gcc & gfortan compilers |
