@@ -17,6 +17,8 @@ app_list=(
     MPICH
     HDF5
     NETCDF4
+    NETCDFF4
+    NETCDF4CXX
     # NCVIEW
     WRF
     WPS)
