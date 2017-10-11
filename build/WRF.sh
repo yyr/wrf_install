@@ -5,6 +5,8 @@ export WRF_EM_CORE=1        # for em core
 # export WRF_NMM_CORE=1     #  for nmm core
 #-----------------------------------------------------------------------
 
+mkdir /wrf/gcc/WRFV3/chem
+
 # check folder is already present
 if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
     cd $WRF_BASE/src
