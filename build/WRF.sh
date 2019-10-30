@@ -15,13 +15,17 @@ fi
 cd $WRF_ROOT
 
 export NETCDF=${NETCDF4_ROOT}
+export HDF5=${HDF5_ROOT}
 export NETCDFPATH=${NETCDF_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
 export WRF_DA_CORE=0
+export JASPER=${JASPER_ROOT}
 export JASPERLIB=${JASPER_ROOT}/lib
 export JASPERINC=${JASPER_ROOT}/include
 export LD_LIBRARY_PATH=${WRF_BASE}/$dep_root/lib:$LD_LIBRARY_PATH
 export LIBINCLUDE="${WRF_BASE}/$dep_root/lib:${WRF_BASE}/$dep_root/include":$LIBINCLUDE
+
+
 
 blue_echo NETCDF=$NETCDF
 blue_echo WRFIO_NCD_LARGE_FILE_SUPPORT=$WRFIO_NCD_LARGE_FILE_SUPPORT
@@ -51,16 +55,19 @@ $(pwd)/configure.wrf for any final changes.
  Press ENTER to continue."
 [[ $- == *i* ]] && read dummy
 
+# exit
+
+
 
 # ----------- tweak generated "configure.wrf" file -----------------
 ## common problems of configure.wrf should be fixed in the following script
-$SCRIPTS_DIR/build/fix.configure.wrf.sh
+# $SCRIPTS_DIR/build/fix.configure.wrf.sh
 
 # ----------- tweak generated "configure.wrf" file (compiler specific)------------
 # for eg if you want to change configure.wrf file put some code in your
 # check fix.configure.wrf.intel.sh
-[ -f $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh ] &&
-    $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
+# [ -f $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh ] &&
+#     $SCRIPTS_DIR/${machine}/fix.configure.wrf.${COMP}.sh
 
 command_runner \
 ./compile em_real  log.${COMP}.compile

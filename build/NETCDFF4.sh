@@ -2,6 +2,8 @@ source ${SCRIPTS_DIR}/lib/fun.bash
 
 export CPPFLAGS="-I${HDF5_ROOT}/include -I${ZLIB_ROOT}/include -I${NETCDF4_ROOT}/include" LDFLAGS="-L${HDF5_ROOT}/lib -L${ZLIB_ROOT}/lib -L${NETCDF4_ROOT}/lib" LD_LIBRARY_PATH="${HDF5_ROOT}/lib ${ZLIB_ROOT}/lib ${NETCDF4_ROOT}/lib"
 
+export LD_LIBRARY_PATH=${WRF_BASE}/$dep_root/lib:$LD_LIBRARY_PATH
+
 command_runner \
     ./configure \
     --prefix=$NETCDF4_ROOT \

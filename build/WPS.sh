@@ -13,6 +13,8 @@ if [ ! -d $WRF_BASE/$COMP/${DIR} ]; then
 fi
 cd $WPS_ROOT
 
+export WRF_DIR=$WRF_ROOT
+
 export NETCDF=${NETCDF4_ROOT}
 export WRFIO_NCD_LARGE_FILE_SUPPORT=1
 export WRF_DA_CORE=0
@@ -53,13 +55,13 @@ Moving to building WPS now. You can still change configure script
 
 # ----------- tweak generated "configure.wps" file -----------------
 ## common problems of configure.wps should be fixed in the following script
-$SCRIPTS_DIR/build/fix.configure.wps.sh
+# $SCRIPTS_DIR/build/fix.configure.wps.sh
 
 # ----------- tweak generated "configure.wps" file (compiler specific)------------
 # for eg if you want to change configure.wps file put some code in your
 # check fix.configure.wps.intel.sh
-[ -f $SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh ] &&
-    $SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh
+# [ -f $SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh ] &&
+#     $SCRIPTS_DIR/${machine}/fix.configure.wps.${COMP}.sh
 
 # read dummy                      # manual inspection
 command_runner \

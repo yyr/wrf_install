@@ -61,18 +61,27 @@ function build_app()
     blue_echo "Building \"$1\" .... "
     . $appsdir/${1}.env
 
-    if [ -d $WRF_BASE/src/${DIR} ]; then
-        cd $WRF_BASE/src/${DIR}
-    else
-        red_echo "WARNING: Seems $1 hasn't been downloaded yet."
-        blue_echo "Trying to initiate download"
-        $SCRIPTS_DIR/download_app.sh ${1}
-        if [ $? -ne 0 ]; then
-            red_echo Failed to download: ${1}.
-            exit 2
-        fi
-        cd $WRF_BASE/src/${DIR}
-    fi
+
+    # is app download yet?
+    case $APP in
+        WRF* )
+        ;;
+        WPS* )
+        ;;
+        *)
+            if [ -d $WRF_BASE/src/${DIR} ]; then
+                cd $WRF_BASE/src/${DIR}
+            else
+                red_echo "WARNING: Seems $1 hasn't been downloaded yet."
+                blue_echo "Trying to initiate download"
+                $SCRIPTS_DIR/download_app.sh ${1}
+                if [ $? -ne 0 ]; then
+                    red_echo Failed to download: ${1}.
+                    exit 2
+                fi
+                cd $WRF_BASE/src/${DIR}
+            fi
+    esac
 
     for dep in ${DEP[@]}; do        # soruce dep envs
         source $appsdir/$dep.env
